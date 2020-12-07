@@ -14,3 +14,12 @@
 
 
 
+51.5149
+-0.0932855
+
+
+https://data.police.uk/api/crimes-street/all-crime
+
+poly=52.268,0.543:52.794,0.238:52.130,0.478&date=2017-01
+
+https://data.police.uk/api/city-of-london/cp/boundary
