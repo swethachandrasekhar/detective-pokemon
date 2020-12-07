@@ -9,8 +9,10 @@ class App extends Component {
   render() {
     return (
       <Router basename={process.env.PUBLIC_URL}>
-        <Route path="/" component={Home} />
-        <Footer />
+        <>
+          <Route path="/" component={Home} />
+          <Footer />
+        </>
       </Router>
     );
   }
