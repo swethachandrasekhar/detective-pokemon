@@ -1,76 +1,58 @@
 import { Component } from 'react';
-import axios from 'axios'
+import axios from 'axios';
+import { cityCoordinates, crimeCategories} from '../dataStructures.js'
 
 class Home extends Component {
     constructor(){
         super();
         this.state = {
-            neighbourhoods: [],
-            selectedNeighbourhood: '',
-            coordinates: {
-                lat: '',
-                lon: ''
-            }
+            crimeCategories: [],
+            selectedCrime: '',
+            selectedLocation: ''
         }
     }
 
     componentDidMount(){
-        // First API call to get all the neigbourhoods to populate the dropdown list
-        const neighbourhoodsApiCall = axios({
-            url: `https://data.police.uk/api/leicestershire/neighbourhoods`,
-            responseType: 'json',
-            method: 'GET'
-    })
-    .then((res) => {
-        const results = res.data.map((location) => {
-            return location;
-        })
-            this.setState({
-                neighbourhoods: results
-            })
+        // store each properties in an array
+        const crimeArray = Object.keys(crimeCategories);
+        this.setState({
+            crimeCategories: crimeArray
         })
     }
 
-    getLatitudeAndLongitude = (id) => {
+    getCrime = (customArea, crimeCategory) => {
         return axios({
-            url: `https://data.police.uk/api/leicestershire/${id}`,
-            responseType: 'json',
-            method: 'GET'
-        })
-    } 
-
-    getCrime = () => {
-        return axios({
-            url: `https://data.police.uk/api/crimes-at-location?date=2020-06`,
+            url: `https://data.police.uk/api/crimes-street/${crimeCategory}`,
             responseType: 'json',
             method: 'GET',
             params: {
-                lat: 52.6381,
-                lng: -1.06538
+                poly: customArea
             }
         })
     }
 
     onLocationChange = (e) => {
-        // this.setState({
-        //     selectedNeighbourhood: e.target.value
-        // })
-        const promiseObj = this.getLatitudeAndLongitude(e.target.value)
-        promiseObj.then((res) => {
+        this.setState({
+            selectedLocation: e.target.value
+        })
+    }
+    
 
-            this.setState({
-                coordinates: {
-                    lat: res.data.centre.latitude,
-                    lon: res.data.centre.longitude
-                }
-            })
-            this.getCrime().then((res) => {
-                console.log(res )
-            })
-            
+    handleCrime = (e) => {
+        this.setState({
+            selectedCrime: e.target.value
         })
     }
 
+    handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(this.state.selectedLocation, this.state.selectedCrime)
+        const crime = this.getCrime(this.state.selectedLocation, this.state.selectedCrime);
+        crime.then((res) => {
+            console.log(res)
+        })
+
+    }
 
 
     render() {
@@ -79,15 +61,29 @@ class Home extends Component {
                 <h1>Detective Pokémon</h1>
 
                 <form>
-                    <select onChange={this.onLocationChange} name="" id="">
-                        {this.state.neighbourhoods.map((place ) => {
+                    <select onChange={this.onLocationChange}>
+                        {cityCoordinates.map((place ) => {
                             return(
-                                <option key={place.id} value={place.id}>
+                                <option key={place.poly} value={place.poly}>
                                     {place.name}
                                 </option>
                             )
                         })}
                     </select>
+
+                    <select onChange={this.handleCrime}>
+                        {
+                            this.state.crimeCategories.map((category, index) => {
+                                return(
+                                    <option key={index} value={category}>{
+                                        category
+                                    }</option>
+                                )
+                            })
+                        }
+                    </select>
+
+                    <button onClick={this.handleSubmit}>Submit</button>
                 </form>
             </>
         );

@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Component } from 'react';
-import './App.css';
+import '../App.css';
 
-import Home from './components/Home.js';
-import Footer from './components/Footer.js';
+import Home from './Home.js';
+import Footer from './Footer.js';
 
 class App extends Component {
   render() {
