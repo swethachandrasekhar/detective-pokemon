@@ -27,15 +27,17 @@ class Pokemons extends Component {
     //Push the success pokemon object along with a success flag
     let pokemObject =
       successfulPokemon.data.pokemon[this.getRandomIndex(10)].pokemon;
+
     pokemObject.match = "success";
     newPokemonArray.push(pokemObject);
     console.log(newPokemonArray);
     //Make an API call to get 4 random pokemon of different types
     let unsuccessfulPokemonPromises = [];
     for (let i = 0; i < 4; i++) {
-      unsuccessfulPokemonPromises[i] = await this.getPokemonsAPICall(
-        this.getRandomIndex(100)
-      );
+      unsuccessfulPokemonPromises[i] = await this.getPokemonsAPICall(18);
+
+        // this.getRandomIndex(18)
+    //   );
     }
 
     //Parse this promise array to create a list of unsuccessful pokemons
@@ -52,7 +54,7 @@ class Pokemons extends Component {
     //   pokemonList: newPokemonArray,
     // });
 
-    this.getFinalPokemonDisplayList(newPokemonArray);
+    // this.getFinalPokemonDisplayList(newPokemonArray);
     // return newPokemonArray
   };
 
@@ -79,7 +81,7 @@ class Pokemons extends Component {
   getPokemonsAPICall = (PokemonType) => {
     return axios({
       method: "GET",
-      url: `https://pokeapi.co/api/v2/type/3`,
+      url: `https://pokeapi.co/api/v2/type/${PokemonType}`,
       dataResponse: "json",
     });
   };
@@ -96,9 +98,10 @@ class Pokemons extends Component {
     let unSuccessfulPokemonArray = [];
     for (let i = 0; i < PokemonPromises.length; i++) {
       let pokemObject =
-        PokemonPromises[i].data.pokemon[this.getRandomIndex(100)].pokemon;
-      pokemObject.match = "fail";
+        PokemonPromises[i].data.pokemon[this.getRandomIndex(PokemonPromises[i].data.pokemon.length)].pokemon;
       console.log(pokemObject);
+        pokemObject.match = "fail";
+      
       unSuccessfulPokemonArray.push(pokemObject);
     }
     return unSuccessfulPokemonArray;
