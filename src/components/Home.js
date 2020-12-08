@@ -70,7 +70,7 @@ class Home extends Component {
       console.log(this.state.successPokemonType);
     return (
       <>
-        <h1>Detective Pokémon</h1>
+        
         <form>
           <select onChange={this.onLocationChange}>
             {cityCoordinates.map((place) => {
