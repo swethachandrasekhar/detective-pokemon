@@ -6,6 +6,7 @@ class Pokemons extends Component {
     super();
     this.state = {
       displayPokemonList: [],
+    //   successPokemonType: this.props.successPokemonType,
     };
   }
 
@@ -92,7 +93,7 @@ class Pokemons extends Component {
             this.state.displayPokemonList
             ? 
             this.state.displayPokemonList.map((pokemon) => {
-              return(<p>{pokemon.name}</p>)  
+              return <p>{pokemon.name}</p>;  
             })
             : null
        

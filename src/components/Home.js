@@ -95,15 +95,14 @@ class Home extends Component {
           <button onClick={this.handleSubmit}>Submit</button>
         </form>
         <div>
-        {
-        (this.state.successPokemonType)
-        ? <Pokemons
-          crime={this.state.selectedCrime}
-          successPokemonType={this.state.successPokemonType}
-        />
-       : null }
+          {this.state.successPokemonType ? (
+            <Pokemons
+              key={this.state.successPokemonType}
+              crime={this.state.selectedCrime}
+              successPokemonType={this.state.successPokemonType}
+            />
+          ) : null}
         </div>
-        
       </>
     );
   }
