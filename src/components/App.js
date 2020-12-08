@@ -12,7 +12,7 @@ class App extends Component {
       <Router basename={process.env.PUBLIC_URL}>
         <Header />
         <>
-          <Route path="/" component={Home} />
+          <Home />
           <Footer />
         </>
       </Router>
