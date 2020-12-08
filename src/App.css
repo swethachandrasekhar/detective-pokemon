@@ -30,3 +30,16 @@ body {
 h1,h2,h3,h4 {
   font-family: 'Iceberg', cursive
 }
+
+.wrapper {
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 90%;
+}
+
+header{
+  text-align: center;
+  height: 100vh;
+  /* background: rgb(213,195,0);
+  background: linear-gradient(0deg, rgba(213,195,0,1) 20%, rgba(39,56,120,1) 50%, rgba(229,254,204,1) 80%);  */
+}
