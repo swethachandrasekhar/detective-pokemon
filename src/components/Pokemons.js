@@ -6,16 +6,16 @@ class Pokemons extends Component {
     super();
     this.state = {
       displayPokemonList: [],
-    //   successPokemonType: this.props.successPokemonType,
+      pokemonList: [],
+      //   successPokemonType: this.props.successPokemonType,
     };
   }
 
   componentDidMount() {
-      console.log(this.props.successPokemonType);
+    console.log(this.props.successPokemonType);
 
-   this.getPokemons(this.props.successPokemonType);
+    this.getPokemons(this.props.successPokemonType);
     // console.log(newPokemonArray);
-    
   }
 
   getPokemons = async (successPokemonType) => {
@@ -45,16 +45,37 @@ class Pokemons extends Component {
 
     //Push the unsuccessful pokemons into the pokemons array
     newPokemonArray.push(...unsuccessfulArray);
-    // newPokemonArray = Object.values(newPokemonArray)  
-    console.log(newPokemonArray);      
+    // newPokemonArray = Object.values(newPokemonArray)
+    console.log(newPokemonArray);
     // Set the display list with the pokemon array
-    this.setState({
-      displayPokemonList: newPokemonArray,
-    });
+    // this.setState({
+    //   pokemonList: newPokemonArray,
+    // });
+
+    this.getFinalPokemonDisplayList(newPokemonArray);
     // return newPokemonArray
   };
 
-
+  getFinalPokemonDisplayList = (pokemonArray) => {
+      
+    let requestPokemonArray = []    
+    for (let i =0; i < pokemonArray.length; i++){
+        requestPokemonArray.push(axios.get(pokemonArray[i].url))
+    }
+      
+        Promise.all([...requestPokemonArray])
+          .then(([...res]) => {
+             
+            res.forEach(pokemonObj => {
+                const image = pokemonObj[`data`][`sprites`][`front_default`]
+                const abilities = (Object.values(pokemonObj[`data`][`abilities`]))
+            });
+        
+          })
+          .catch((errors) => {
+            // react on errors.
+          });
+  }
   getPokemonsAPICall = (PokemonType) => {
     return axios({
       method: "GET",
@@ -63,8 +84,6 @@ class Pokemons extends Component {
     });
   };
 
-  
-  
   getRandomIndex = (limit) => {
     //   get an index between 0 to 9
 
@@ -72,7 +91,6 @@ class Pokemons extends Component {
     return index;
   };
 
-  
   parseUnsuccessfulPokemonPromises = (PokemonPromises) => {
     console.log(PokemonPromises);
     let unSuccessfulPokemonArray = [];
@@ -87,17 +105,11 @@ class Pokemons extends Component {
   };
 
   render() {
-    return(
-
-        
-            this.state.displayPokemonList
-            ? 
-            this.state.displayPokemonList.map((pokemon) => {
-              return <p>{pokemon.name}</p>;  
-            })
-            : null
-       
-    )
+    return this.state.displayPokemonList
+      ? this.state.displayPokemonList.map((pokemon) => {
+          return <p>{pokemon.name}</p>;
+        })
+      : null;
   }
 }
 
