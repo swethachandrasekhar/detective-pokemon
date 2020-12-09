@@ -213,7 +213,7 @@ class Pokemons extends Component {
         ? this.state.displayPokemonList.map((pokemon) => {
           return (
             <>
-              <article>
+              <article className="pokeDisplay">
                 <p>{pokemon.name}</p>
                 <img src={pokemon.image} alt="" />
               </article>

@@ -1,4 +1,7 @@
 
 .pokeDisplay {
-  color: $greywhite
+    width: 300px;
+    img {
+      width: 100%;
+    }
 }

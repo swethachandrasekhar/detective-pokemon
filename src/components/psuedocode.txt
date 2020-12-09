@@ -14,12 +14,16 @@
 
 
 
-51.5149
--0.0932855
 
-
-https://data.police.uk/api/crimes-street/all-crime
-
-poly=52.268,0.543:52.794,0.238:52.130,0.478&date=2017-01
-
-https://data.police.uk/api/city-of-london/cp/boundary
+0. In Header, they enter name
+1. In Home,
+    User selects city and crime type, submits, 
+2. Then, in Pokemons, display 5 Pokemon options.
+    User selects choice,
+3a. Pass that choice up to Home, 
+    store in State,
+3b. Pass as prop down to Result component.
+3c. RESULT:
+    Display: 
+    - user's name
+    - all info about Pokemon they chose.
