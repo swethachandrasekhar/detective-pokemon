@@ -144,8 +144,8 @@ class Pokemons extends Component {
   getRandomIndex = (limit) => {
     //   get an index between 0 to 9
 
-    const index = Math.floor(Math.random() * limit) + 1;
-    return index;
+    const index = Math.floor(Math.random() * limit) ;
+    return index === 0 ? index + 1 : index;
   };
 
   parseUnsuccessfulPokemonPromises = (PokemonPromises) => {
