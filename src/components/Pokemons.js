@@ -201,16 +201,28 @@ class Pokemons extends Component {
   };
 
   render() {
-    return this.state.displayPokemonList
-      ? this.state.displayPokemonList.map((pokemon) => {
-        return (
-          <>
-            <p>{pokemon.name}</p>
-            <img src={pokemon.image} alt="" />
-          </>
-        )
-      })
-      : null;
+    return (
+      <>
+
+        <div className="quizMessage">
+          You have chosen x and y.
+        </div>
+
+        {/* DISPLAY LIST OF POKEMON OPTIONS */}
+        {this.state.displayPokemonList
+        ? this.state.displayPokemonList.map((pokemon) => {
+          return (
+            <>
+              <article>
+                <p>{pokemon.name}</p>
+                <img src={pokemon.image} alt="" />
+              </article>
+            </>
+          )
+        })
+        : null};
+      </>
+    )
   }
 }
 

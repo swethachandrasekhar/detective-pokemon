@@ -1,0 +1,60 @@
+html{
+  font-size: 62.5%;
+  background-color: $red;
+  background: url('../assets/detectivepikachu-bg-crop-tight.jpeg');
+  background-size: cover;
+  background-position: right;
+  background-attachment: fixed;
+}
+
+body {
+  font-family: 'Barlow', sans-serif;
+  font-size: 1.8rem;
+  color: $greywhite;
+}
+
+a {
+  color: $yellow;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+h1,h2,h3,h4 {
+  font-family: 'Iceberg', cursive;
+  color: $yellow;
+}
+
+h1 {
+  border: 7px solid $red;
+  border-radius: 2rem;
+  font-size: 6rem;
+  background-color: $black;
+//   width: 500px;
+}
+
+.wrapper {
+  margin: 0 auto;
+  max-width: 1200px;
+  width: 90%;
+}
+
+header{
+  text-align: center;
+  height: 100vh;
+}
+
+article {
+  margin: 0 auto 40px;
+  padding: 0 20px;
+  background-color: $red;
+  border-radius: 25px;
+  border: 4px solid $lightartificialgreen;
+    img {
+      border-radius: 50%;
+    }
+    p {
+        text-align: center;
+        color: $yellow;
+        font-size: 2.8rem;
+    }
+}

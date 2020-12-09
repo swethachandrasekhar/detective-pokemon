@@ -94,6 +94,8 @@ class Home extends Component {
 
           <button onClick={this.handleSubmit}>Submit</button>
         </form>
+
+        {/* DISPLAY ALL QUIZ STUFF */}
         <div>
           {this.state.successPokemonType ? (
             <Pokemons
@@ -103,6 +105,13 @@ class Home extends Component {
             />
           ) : null}
         </div>
+
+         {/* <div className="pokeDisplay">
+             <article>
+                <img src="" alt=""/>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cupiditate, ducimus expedita, enim porro, aspiditate ea deserunt facere impedit esse distinctio suscipit, rem sequi ipsa tempora maxime nesciunt. Qui provident cupiditate temporibus.</p>
+             </article>
+        </div> */}
       </>
     );
   }
