@@ -69,10 +69,10 @@ class Pokemons extends Component {
 
     console.log(unsuccessfulArray)
 
-    const returnArray = await this.getFinalPokemonDisplayList(unsuccessfulArray)
+    this.getFinalPokemonDisplayList(unsuccessfulArray)
 
 
-    console.log('returnArray',returnArray)
+    // console.log('returnArray',returnArray)
     // this.setState({
     //   displayPokemonList: returnArray
     // })
@@ -88,51 +88,50 @@ class Pokemons extends Component {
       requestPokemonArray.push(axios.get(pokemonArray[i].url))
     }
 
-    await Promise.all([...requestPokemonArray])
-      .then(([...res]) => {
-        
-        console.log('res', res.length)
+    
+   const resultPokemonObject =  await Promise.all([...requestPokemonArray]);
+   console.log(resultPokemonObject)
 
-         allPokeProperties = res.filter((pokemonObj, index) => {
-            // console.log('index', index)
-            // console.log(pokemonObj);
+            resultPokemonObject.forEach((pokemonObj, index) => {
+              let onePokeProperties = {};
+              const pokeImage =
+                pokemonObj[`data`][`sprites`][`other`][`official-artwork`][
+                  `front_default`
+                ];
 
-            const pokeImage = pokemonObj[`data`][`sprites`][`other`][`official-artwork`][`front_default`];
-
-            
-            let onePokeProperties = {};
-            if ( pokeImage !== null){
-              console.log(pokeImage);
-              // console.log('inside if statement')
-              const abilities = (Object.values(pokemonObj[`data`][`abilities`]))
-              let abilityArray = [];
-              abilities.forEach(ability => {
-                abilityArray.push(ability.ability.name)
-              })
-              // console.log(abilityArray);
-              const pokeName = (pokemonObj[`data`][`name`]);
-              let match = '';
-              index === 0 ? match = "correct" : match = "wrong";
-              onePokeProperties = {
-                "name": pokeName,
-                "abilities": abilityArray,
-                "id": (pokemonObj[`data`][`id`]),
-                "match": match,
-                image: pokeImage
+              if (pokeImage !== null) {
+                console.log(pokeImage);
+                // const abilities = Object.values(
+                //   pokemonObj[`data`][`abilities`]
+                // );
+                const abilities = pokemonObj[`data`][`abilities`];
+                console.log(abilities)
+                let abilityArray = [];
+                abilities.forEach((ability) => {
+                  abilityArray.push(ability.ability.name);
+                });
+                console.log(abilityArray);
+                const pokeName = pokemonObj[`data`][`name`];
+                let match = "";
+                index === 0 ? (match = "correct") : (match = "wrong");
+                onePokeProperties = {
+                  name: pokeName,
+                  abilities: abilityArray,
+                  id: pokemonObj[`data`][`id`],
+                  match: match,
+                  image: pokeImage,
+                };
+                allPokeProperties.push(onePokeProperties);
               }
-              return onePokeProperties;
-          }
-            // console.log(onePokeProperties);
-            // allPokeProperties.push(onePokeProperties);
-          
-          });
+            });
+
+          this .setState({
+              displayPokemonList: allPokeProperties
+
+          })
          
-      })
-      .catch((errors) => {
-        // react on errors.
-      });
-    return allPokeProperties;
-  }
+ }
+
 
   getPokemonsAPICall = (PokemonType) => {
     return axios({
