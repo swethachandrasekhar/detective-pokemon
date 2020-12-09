@@ -7,7 +7,9 @@ class Pokemons extends Component {
     this.state = {
       displayPokemonList: [],
       pokemonList: [],
-      //   successPokemonType: this.props.successPokemonType,
+      successPokemonArray: [],
+      unSuccessPokemonArray: []
+      // successPokemonType: this.props.successPokemonType,
     };
   }
 
@@ -16,6 +18,39 @@ class Pokemons extends Component {
 
     this.getPokemons(this.props.successPokemonType);
     // console.log(newPokemonArray);
+  }
+
+  // success pokemon obj in state
+  setArrayOfSuccessPokemonObj = (succeesPokemonPromise) => {
+    //Push the success pokemon object along with a success flag
+    let pokemObject =
+      succeesPokemonPromise.data.pokemon[this.getRandomIndex(10)].pokemon;
+    pokemObject.match = "success";
+
+    const tempArray = []
+    tempArray.push(pokemObject)
+    console.log(tempArray);
+    this.setState({
+      successPokemonArray: tempArray
+    })
+
+  }
+
+  setArrayOfWrongPokemonObj = async () => {
+    // WRONG ANSWERS API CALL =======================
+    //Make an API call to get random pokemon of different types
+    let unsuccessfulPokemonPromises = [];
+    for (let i = 0; i < 10; i++) {
+      unsuccessfulPokemonPromises[i] = await this.getPokemonsAPICall(this.getRandomIndex(17));
+    }
+
+    //Parse this promise array to create a list of unsuccessful pokemons
+    const unsuccessfulArray = this.parseUnsuccessfulPokemonPromises(
+      unsuccessfulPokemonPromises
+    );
+    console.log(unsuccessfulArray)
+
+    return unsuccessfulArray;
   }
 
   getPokemons = async (successPokemonType) => {
@@ -27,87 +62,78 @@ class Pokemons extends Component {
     console.log(`test`);
     let successfulPokemon = await this.getPokemonsAPICall(successPokemonType);
 
-    //Push the success pokemon object along with a success flag
-    let pokemObject =
-      successfulPokemon.data.pokemon[this.getRandomIndex(10)].pokemon;
-    pokemObject.match = "success";
-    newPokemonArray.push(pokemObject);
-    console.log(newPokemonArray);
+    // set success pokemon object in state
+    this.setArrayOfSuccessPokemonObj(successfulPokemon);
 
-    // WRONG ANSWERS API CALL =======================
-    //Make an API call to get 4 random pokemon of different types
-    let unsuccessfulPokemonPromises = [];
-    for (let i = 0; i < 10; i++) {
-      unsuccessfulPokemonPromises[i] = await this.getPokemonsAPICall(this.getRandomIndex(17));
+    const unsuccessfulArray = await this.setArrayOfWrongPokemonObj();
 
-        // this.getRandomIndex(18)
-    //   );
-    }
+    console.log(unsuccessfulArray)
 
-    //Parse this promise array to create a list of unsuccessful pokemons
-    const unsuccessfulArray = this.parseUnsuccessfulPokemonPromises(
-      unsuccessfulPokemonPromises
-    );
+    const returnArray = await this.getFinalPokemonDisplayList(unsuccessfulArray)
 
-    //Push the unsuccessful pokemons into the pokemons array
-    newPokemonArray.push(...unsuccessfulArray);
-    // newPokemonArray = Object.values(newPokemonArray)
-    // console.log(newPokemonArray);
-    // Set the display list with the pokemon array
+
+    console.log('returnArray',returnArray)
     // this.setState({
-    //   pokemonList: newPokemonArray,
-    // });
-
-    this.getFinalPokemonDisplayList(newPokemonArray);
+    //   displayPokemonList: returnArray
+    // })
     // return newPokemonArray
   };
 
 
-  getFinalPokemonDisplayList = (pokemonArray) => {
-    // console.log(pokemonArray);
-    let requestPokemonArray = []    
-    for (let i =0; i < pokemonArray.length; i++){
-        requestPokemonArray.push(axios.get(pokemonArray[i].url))
+  getFinalPokemonDisplayList = async (pokemonArray) => {
+    console.log(pokemonArray);
+    let requestPokemonArray = [];
+    let allPokeProperties = [];
+    for (let i = 0; i < pokemonArray.length; i++) {
+      requestPokemonArray.push(axios.get(pokemonArray[i].url))
     }
 
-        Promise.all([...requestPokemonArray])
-          .then(([...res]) => {
-            let allPokeProperties = [];
-            res.forEach((pokemonObj, index) => {
-                // console.log(pokemonObj);
-                const pokeImage = pokemonObj[`data`][`sprites`][`other`][`official-artwork`][`front_default`];
-                // console.log(pokeImage);
-                if (pokeImage !== null){
-                  const abilities = (Object.values(pokemonObj[`data`][`abilities`]))
-                  let abilityArray = [];
-                  abilities.forEach(ability => {
-                    abilityArray.push(ability.ability.name)
-                  })
-                  // console.log(abilityArray);
-                  const pokeName = (pokemonObj[`data`][`name`]);
-                  let match = '';
-                  index === 0 ? match = "correct" : match = "wrong";
-                  const onePokeProperties = {
-                    "name": pokeName,
-                    "abilities": abilityArray,
-                    "id": (pokemonObj[`data`][`id`]),
-                    "match": match,
-                    image: pokeImage
-                  }
-                  // console.log(onePokeProperties);
-                  allPokeProperties.push(onePokeProperties);
-                }
-            });
-            console.log(allPokeProperties);
-            this.setState({
-              displayPokemonList: allPokeProperties
-            })
+    await Promise.all([...requestPokemonArray])
+      .then(([...res]) => {
         
-          })
-          .catch((errors) => {
-            // react on errors.
+        console.log('res', res.length)
+
+         allPokeProperties = res.filter((pokemonObj, index) => {
+            // console.log('index', index)
+            // console.log(pokemonObj);
+
+            const pokeImage = pokemonObj[`data`][`sprites`][`other`][`official-artwork`][`front_default`];
+
+            
+            let onePokeProperties = {};
+            if ( pokeImage !== null){
+              console.log(pokeImage);
+              // console.log('inside if statement')
+              const abilities = (Object.values(pokemonObj[`data`][`abilities`]))
+              let abilityArray = [];
+              abilities.forEach(ability => {
+                abilityArray.push(ability.ability.name)
+              })
+              // console.log(abilityArray);
+              const pokeName = (pokemonObj[`data`][`name`]);
+              let match = '';
+              index === 0 ? match = "correct" : match = "wrong";
+              onePokeProperties = {
+                "name": pokeName,
+                "abilities": abilityArray,
+                "id": (pokemonObj[`data`][`id`]),
+                "match": match,
+                image: pokeImage
+              }
+              return onePokeProperties;
+          }
+            // console.log(onePokeProperties);
+            // allPokeProperties.push(onePokeProperties);
+          
           });
+         
+      })
+      .catch((errors) => {
+        // react on errors.
+      });
+    return allPokeProperties;
   }
+
   getPokemonsAPICall = (PokemonType) => {
     return axios({
       method: "GET",
@@ -119,7 +145,7 @@ class Pokemons extends Component {
   getRandomIndex = (limit) => {
     //   get an index between 0 to 9
 
-    const index = Math.floor(Math.random() * limit)+ 1;
+    const index = Math.floor(Math.random() * limit) + 1;
     return index;
   };
 
@@ -127,26 +153,31 @@ class Pokemons extends Component {
     // console.log(PokemonPromises);
     let unSuccessfulPokemonArray = [];
     for (let i = 0; i < PokemonPromises.length; i++) {
+      console.log(PokemonPromises[i])
       let pokemObject =
-        PokemonPromises[i].data.pokemon[this.getRandomIndex(PokemonPromises[i].data.pokemon.length)].pokemon;
+        PokemonPromises[i].data
+        .pokemon[
+          this.getRandomIndex(PokemonPromises[i].data.pokemon.length)
+        ].pokemon;
       // console.log(pokemObject);
-        pokemObject.match = "fail";
-      
+      pokemObject.match = "fail";
+
       unSuccessfulPokemonArray.push(pokemObject);
     }
+
     return unSuccessfulPokemonArray;
   };
 
   render() {
     return this.state.displayPokemonList
       ? this.state.displayPokemonList.map((pokemon) => {
-          return (
-            <>
-              <p>{pokemon.name}</p>
-              <img src={`https://pokeres.bastionbot.org/images/pokemon/${pokemon.id}.png`} alt=""/>
-            </>
-          )
-        })
+        return (
+          <>
+            <p>{pokemon.name}</p>
+            <img src={pokemon.image} alt="" />
+          </>
+        )
+      })
       : null;
   }
 }
