@@ -18,8 +18,22 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary
 /* #273878 */
 /* #e5fecc */
 
+/* darkgreen: #51713e */
+/* purple: #2a649e */
+/* green: #7ac3a6 */
+/* lightartificialgreen: #a7f5e7 */
+/* black: #040402 */
+/* greywhite: #e7e8e8 */
+/* yellow: #fde000 */
+/* red: #e71119 */
+
 html{
   font-size: 62.5%;
+  background-color: #e71119;
+  background: url('./assets/detectivepikachu-bg-crop-tight.jpeg');
+  background-size: cover;
+  background-position: right;
+  background-attachment: fixed;
 }
 
 body {
@@ -28,7 +42,14 @@ body {
 }
 
 h1,h2,h3,h4 {
-  font-family: 'Iceberg', cursive
+  font-family: 'Iceberg', cursive;
+  color: #fde000;
+}
+
+h1 {
+  border: 0.4rem solid #e71119;
+  border-radius: 2rem;
+  font-size: 6rem;
 }
 
 .wrapper {
@@ -42,4 +63,45 @@ header{
   height: 100vh;
   /* background: rgb(213,195,0);
   background: linear-gradient(0deg, rgba(213,195,0,1) 20%, rgba(39,56,120,1) 50%, rgba(229,254,204,1) 80%);  */
+}
+
+
+.introText {
+  width: 500px;
+  margin: 0 auto;
+}
+p {
+  text-align: center;
+  color: #e7e8e8;
+  font-size: 3rem;
+}
+
+/* .userNameForm { */
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* text-align: center; */
+  /* margin: 0 auto; */
+/* } */
+label, input, .nameButton {
+  font-size: 2.5rem;
+}
+label {
+  border: 0.4rem solid #e71119;
+  color: #e71119;
+  background-color: #040402;
+  padding: 10px 15px 10px 20px;
+  border-radius: 25px 0 0 25px;
+}
+input {
+  /* background-color: #e7e8e8; */
+  background-color: #a7f5e7;
+  padding: 10px;
+  border: 0.4rem solid #51713e;
+  /* height: 60px; */
+}
+.nameButton {
+  background-color: #fde000;
+  border-color: #fde000;
+  border-radius: 0 25px 25px 0;
+  padding: 10px 30px 10px 25px;
 }
