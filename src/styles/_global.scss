@@ -1,12 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow&family=Iceberg&display=swap');
-
-
-/* OUR STYLES START HERE */
-
-/* font-family: 'Barlow', sans-serif; */
-
-  /* font-family: 'Iceberg', cursive; */
-
 html{
   font-size: 62.5%;
   background-color: $red;
@@ -19,6 +10,13 @@ html{
 body {
   font-family: 'Barlow', sans-serif;
   font-size: 1.8rem;
+  color: $greywhite;
+}
+
+a {
+  color: $yellow;
+  text-decoration: none;
+  text-transform: uppercase;
 }
 
 h1,h2,h3,h4 {
@@ -43,18 +41,17 @@ h1 {
 header{
   text-align: center;
   height: 100vh;
-  /* background: rgb(213,195,0);
-  background: linear-gradient(0deg, rgba(213,195,0,1) 20%, rgba(39,56,120,1) 50%, rgba(229,254,204,1) 80%);  */
 }
 
-
-.introText {
-  width: 500px;
+article {
   margin: 0 auto 40px;
   padding: 0 20px;
   background-color: $red;
   border-radius: 25px;
   border: 4px solid $lightartificialgreen;
+    img {
+      border-radius: 50%;
+    }
     p {
         text-align: center;
         color: $yellow;

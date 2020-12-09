@@ -24,10 +24,10 @@ class Header extends Component{
                     <div className="wrapper">
                         <h1>Detective Pokémon</h1>
 
-                        <div className="introText">
+                        <article className="introText">
                             <p>It is dark times out there. In this new world, Pokémon come to rescue and support the UK law enforcement.</p> 
                             <p>Pick a Pokemon that is best suited to help you solve a crime. Each pokemon has different abilities that can help them solve different categories of crime.</p>
-                        </div>
+                        </article>
 
                         <NameInput userInput={this.getUsername}/>
 

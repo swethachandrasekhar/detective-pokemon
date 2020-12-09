@@ -10,7 +10,7 @@ class App extends Component {
   render() {
     return (
       <>
-        < Ball />
+        <Ball />
         <Header />
         <Home />
         <Footer />
