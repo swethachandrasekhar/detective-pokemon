@@ -21,11 +21,11 @@ class NameInput extends Component {
 
     render() {
         return (
-            <form name="userName">
-                <label htmlFor="nameInput">Enter your name: </label>
+            <form name="userName" className="userNameForm">
+                <label htmlFor="nameInput">Your name: </label>
                 <input onChange={this.handleChange} type="text" name="nameInput" id="nameInput"/>
 
-                <button onClick={this.handleSubmit}> Submit name</button>
+                <button className="nameButton" onClick={this.handleSubmit}> Submit</button>
             </form>
         )
     }
