@@ -78,7 +78,7 @@ class Pokemons extends Component {
     // RIGHT ANSWERS API CALL =======================
     //Make an API call to get a list of Pokemons for Successful Pokemon Type
     //Store the top result in the displayPokemons List
-    let newPokemonArray = [];
+    // let newPokemonArray = [];
     // console.log(`test`);
     let successfulPokemon = await this.getPokemonsAPICall(successPokemonType);
     // console.log(successfulPokemon);
@@ -226,7 +226,7 @@ class Pokemons extends Component {
     console.log(this.state.displayPokemonList);
     return (
       <>
-        <div className="quizMessage" key="quizMessage">
+        <div className="quizMessage">
           <p>
             {" "}
             You are in <span className="chosenCity">{this.state.cityName}</span>
@@ -236,11 +236,11 @@ class Pokemons extends Component {
           </p>
         </div>
 
-        <div className="chooseYourFighter" key="chooseYourFighter">
+        <div className="chooseYourFighter">
           <p>Choose a Pokemon to help you solve the case:</p>
         </div>
 
-        <div className="options" key="options">
+        <div className="options">
           {/* DISPLAY LIST OF POKEMON OPTIONS */}
           {this.state.displayPokemonList
             ? this.state.displayPokemonList.map((pokemon, pokemonIndex) => {
@@ -257,21 +257,16 @@ class Pokemons extends Component {
                       key={pokemon.name}
                     />
 
-                    <p>
+                    <ul>
                       {pokemon.abilities.map((ability, index) => {
                         return (
-                          <>
-                            <span
-                              key={`${ability}${index}`}
-                              className="ability"
-                            >
-                              {ability}
-                            </span>
+                          <li key={`${ability}${index}`}>
+                            <span className="ability">{ability}</span>
                             &nbsp;
-                          </>
+                          </li>
                         );
                       })}
-                    </p>
+                    </ul>
                   </article>
                 );
               })
