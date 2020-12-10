@@ -10,19 +10,20 @@ class Home extends Component {
   constructor() {
     super();
     this.state = {
-      crimeCategories: [],
+      crimeCategories: [], 
+    //   crimeCategories: {}, 1asdf
       selectedCrime: "",
       selectedLocation: "",
-     
-      successPokemonType: '',
+      successPokemonType: "",
     };
   }
 
   componentDidMount() {
-    // store each properties in an array
+    // store each properties in an array 2asdf
     const crimeArray = Object.keys(crimeCategories);
     this.setState({
-      crimeCategories: crimeArray,
+      crimeCategories: crimeArray, 
+    //   crimeCategories: crimeCategories 3asdf
     });
   }
 
@@ -88,6 +89,7 @@ class Home extends Component {
               key={this.state.successPokemonType}
               crime={this.state.selectedCrime}
               successPokemonType={this.state.successPokemonType}
+              location={this.state.selectedLocation}
             />
           ) : null}
         </div>

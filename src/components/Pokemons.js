@@ -1,23 +1,25 @@
 import React, { Component } from 'react';
 import axios from "axios";
+import { cityCoordinates } from '../dataStructures.js'
 
 class Pokemons extends Component {
   constructor() {
-    super();
+    super();   
     this.state = {
       displayPokemonList: [],
       pokemonList: [],
       successPokemonArray: [],
-      unSuccessPokemonArray: []
+      unSuccessPokemonArray: [],
+      cityName: 'city'
       // successPokemonType: this.props.successPokemonType,
     };
   }
 
   componentDidMount() {
     // console.log(this.props.successPokemonType);
-
     this.getPokemons(this.props.successPokemonType);
     // console.log(newPokemonArray);
+    this.translateCoordsToCityName();
   }
 
   // success pokemon obj in state
@@ -41,6 +43,19 @@ class Pokemons extends Component {
     //   successPokemonArray: tempArray
     // })
 
+  }
+
+  translateCoordsToCityName = () => {
+    // console.log(this.props.location, this.state.cityName);
+    for (const element of cityCoordinates) {
+      // console.log(element.poly);
+      if (element.poly.toString() === this.props.location.toString()) {
+        this.setState({
+          cityName: element.name
+        }) 
+      };
+    };
+    // console.log(this.state.cityName); -- setState delay prevents this from showing correct answer but it works
   }
 
   setArrayOfWrongPokemonObj = async () => {
@@ -199,15 +214,49 @@ class Pokemons extends Component {
   };
 
   render() {
+    // console.log(this.props);
+    console.log(this.state.displayPokemonList);
     return (
       <>
 
         <div className="quizMessage">
-          You have chosen x and y.
+          <p> You are in <span className="chosenCity">{this.state.cityName}</span>, trying to solve a <span className="chosenCrime">{this.props.crime}</span> type of crime.
+          </p>
+        </div>
+
+        <div className="chooseYourFighter">
+          <p>Choose a Pokemon to help you solve the case:</p>
+        </div>
+
+        <div className="options">
+          {/* DISPLAY LIST OF POKEMON OPTIONS */}
+          {this.state.displayPokemonList
+          ? this.state.displayPokemonList.map((pokemon, index) => {
+            return (
+                <article className="pokeDisplay">
+                  <p>{pokemon.name}</p>
+
+                  <img src={pokemon.image} alt="" />
+
+                  <p> 
+                    {pokemon.abilities.map((ability) => {
+                        return (
+                          <>
+                            <span key={`${pokemon.name}${index}`} className="ability">{ability}</span>
+                            &nbsp;
+                            </>
+                        )
+                    })}
+                  </p>
+                  
+                </article>
+            )
+          })
+          : null}
         </div>
 
         {/* DISPLAY LIST OF POKEMON OPTIONS */}
-        {this.state.displayPokemonList
+        {/* {this.state.displayPokemonList
         ? this.state.displayPokemonList.map((pokemon, index) => {
           return (
             <article key={`${pokemon.name}${index}`} className="pokeDisplay">
@@ -216,7 +265,7 @@ class Pokemons extends Component {
               </article>
           )
         })
-        : null}
+        : null} */}
       </>
     )
   }
