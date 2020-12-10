@@ -1,7 +1,10 @@
 import { Component } from 'react';
 import axios from 'axios';
-import { cityCoordinates, crimeCategories} from '../dataStructures.js'
+import { crimeCategories } from '../dataStructures.js'
 import Pokemons from "./Pokemons.js";
+
+import CrimeLocation from './CrimeLocation.js';
+import CrimeCategories from './CrimeCategories.js';
 
 class Home extends Component {
   constructor() {
@@ -46,15 +49,15 @@ class Home extends Component {
     return successType;
   };
 
-  onLocationChange = (e) => {
+  getLocationChange = (selectedLocation) => {
     this.setState({
-      selectedLocation: e.target.value,
+      selectedLocation: selectedLocation,
     });
   };
 
-  handleCrime = (e) => {
+  handleCrime = (selectedCrime) => {
     this.setState({
-      selectedCrime: e.target.value,
+      selectedCrime: selectedCrime,
     });
   };
 
@@ -71,29 +74,10 @@ class Home extends Component {
       console.log(this.state.successPokemonType);
     return (
       <>
-        
         <form>
-          <select onChange={this.onLocationChange}>
-            {cityCoordinates.map((place) => {
-              return (
-                <option key={place.poly} value={place.poly}>
-                  {place.name}
-                </option>
-              );
-            })}
-          </select>
+          <CrimeLocation getLocation={this.getLocationChange} />
 
-          <select onChange={this.handleCrime}>
-            {this.state.crimeCategories.map((category, index) => {
-              return (
-                <option key={index} value={category}>
-                  {category}
-                </option>
-                // category[readableCrimeName]
-              );
-            })}
-            
-          </select>
+          <CrimeCategories getCrimeChange={this.handleCrime} crimeCategoriesArray={this.state.crimeCategories}/>
 
           <button onClick={this.handleSubmit}>Submit</button>
         </form>

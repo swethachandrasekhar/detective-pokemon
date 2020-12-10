@@ -110,8 +110,6 @@ class Pokemons extends Component {
     this.setState({
       displayPokemonList: finalArray,
     });
-
-
   }
 
 //   Fisher-Yates 
@@ -233,9 +231,8 @@ class Pokemons extends Component {
         <div className="options">
           {/* DISPLAY LIST OF POKEMON OPTIONS */}
           {this.state.displayPokemonList
-          ? this.state.displayPokemonList.map((pokemon) => {
+          ? this.state.displayPokemonList.map((pokemon, index) => {
             return (
-              <>
                 <article className="pokeDisplay">
                   <p>{pokemon.name}</p>
 
@@ -245,7 +242,7 @@ class Pokemons extends Component {
                     {pokemon.abilities.map((ability) => {
                         return (
                           <>
-                            <span className="ability">{ability}</span>
+                            <span key={`${pokemon.name}${index}`} className="ability">{ability}</span>
                             &nbsp;
                             </>
                         )
@@ -253,12 +250,22 @@ class Pokemons extends Component {
                   </p>
                   
                 </article>
-              </>
             )
           })
           : null}
         </div>
 
+        {/* DISPLAY LIST OF POKEMON OPTIONS */}
+        {/* {this.state.displayPokemonList
+        ? this.state.displayPokemonList.map((pokemon, index) => {
+          return (
+            <article key={`${pokemon.name}${index}`} className="pokeDisplay">
+                <p>{pokemon.name}</p>
+                <img src={pokemon.image} alt="" />
+              </article>
+          )
+        })
+        : null} */}
       </>
     )
   }
