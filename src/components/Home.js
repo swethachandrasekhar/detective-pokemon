@@ -76,11 +76,20 @@ class Home extends Component {
     return (
       <>
         <form>
+          {/* if selected location not equal to ''
+              then show CrimeCategories dropdown and submit button */}
           <CrimeLocation getLocation={this.getLocationChange} />
+          
+          {
+            this.state.selectedLocation !== ''
+            ? <>
+                <CrimeCategories getCrimeChange={this.handleCrime} crimeCategoriesArray={this.state.crimeCategories}/>
+                <button onClick={this.handleSubmit}>Submit</button> 
+              </>
+            : null
+          }
 
-          <CrimeCategories getCrimeChange={this.handleCrime} crimeCategoriesArray={this.state.crimeCategories}/>
-
-          <button onClick={this.handleSubmit}>Submit</button>
+          
         </form>
 
         {/* DISPLAY ALL QUIZ STUFF */}
@@ -96,13 +105,6 @@ class Home extends Component {
         </div>
 
         <Results isSuccessfulFlag={false}/>
-
-         {/* <div className="pokeDisplay">
-             <article>
-                <img src="" alt=""/>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cupiditate, ducimus expedita, enim porro, aspiditate ea deserunt facere impedit esse distinctio suscipit, rem sequi ipsa tempora maxime nesciunt. Qui provident cupiditate temporibus.</p>
-             </article>
-        </div> */}
       </>
     );
   }
