@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import axios from "axios";
 import { crimeCategories } from "../dataStructures.js";
 import Pokemons from "./Pokemons.js";
@@ -9,6 +9,8 @@ import CrimeCategories from "./CrimeCategories.js";
 class Home extends Component {
   constructor() {
     super();
+    this.scrollToDiv = React.createRef();
+    this.resultsSection = React.createRef();
     this.state = {
       crimeCategories: [],
       selectedCrime: "",
@@ -71,10 +73,15 @@ class Home extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    console.log(this.scrollToDiv);
     //Get the success Pokemon Type and set it in State
     const pokemonType = this.getPokemonType(this.state.selectedCrime);
     this.setState({
       successPokemonType: pokemonType,
+    }, () => {
+      window.scrollTo({
+        top: this.scrollToDiv.current.offsetTop
+      });
     });
   };
 
@@ -82,7 +89,13 @@ class Home extends Component {
   handleGameFlag = (flagValue) => {
     this.setState({
       gameFlag: flagValue,
-    });
+    }, () => {
+      window.scrollTo({
+        top: this.resultsSection.current.offsetTop
+      });
+    }
+    
+    );
   };
 
   render() {
@@ -105,7 +118,7 @@ class Home extends Component {
         </form>
 
         {/* DISPLAY ALL QUIZ STUFF */}
-        <div>
+        <div ref={this.scrollToDiv}>
           {this.state.successPokemonType ? (
             <Pokemons
               key={this.state.successPokemonType}
@@ -118,10 +131,12 @@ class Home extends Component {
         </div>
 
         {/* Display the results page      */}
-        <Results
-          key={this.state.gameFlag}
-          isSuccessfulFlag={this.state.gameFlag}
-        />
+        <div ref={this.resultsSection}>
+          <Results
+            key={this.state.gameFlag}
+            isSuccessfulFlag={this.state.gameFlag}
+          />
+        </div>
 
       </>
     );
