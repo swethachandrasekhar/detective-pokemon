@@ -25,7 +25,13 @@ class App extends Component {
       <>
         <Ball />
         <Header getUser={this.grabUsername} username={this.state.user}/>
-        <Home />
+
+        {
+          this.state.user.length >= 2
+            ? <Home />
+            : null
+        }
+        
         <Footer />
       </>
     );

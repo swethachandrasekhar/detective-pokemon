@@ -156,6 +156,7 @@ class Pokemons extends Component {
         ];
 
       if (pokeImage !== null) {
+
         const abilities = pokemonObj[`data`][`abilities`];
 
         let abilityArray = [];

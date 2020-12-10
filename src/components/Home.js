@@ -89,16 +89,19 @@ class Home extends Component {
     return (
       <>
         <form>
-          {/* Display locations */}
+          {/* if selected location not equal to ''
+              then show CrimeCategories dropdown and submit button */}
           <CrimeLocation getLocation={this.getLocationChange} />
-
-          {/* Display Crime Categories  */}
-          <CrimeCategories
-            getCrimeChange={this.handleCrime}
-            crimeCategoriesArray={this.state.crimeCategories}
-          />
-
-          <button onClick={this.handleSubmit}>Submit</button>
+          
+          {
+            this.state.selectedLocation !== ''
+            ? <>
+                <CrimeCategories getCrimeChange={this.handleCrime} crimeCategoriesArray={this.state.crimeCategories}/>
+                <button onClick={this.handleSubmit}>Submit</button> 
+              </>
+            : null
+          }
+          
         </form>
 
         {/* DISPLAY ALL QUIZ STUFF */}
@@ -119,6 +122,7 @@ class Home extends Component {
           key={this.state.gameFlag}
           isSuccessfulFlag={this.state.gameFlag}
         />
+
       </>
     );
   }
