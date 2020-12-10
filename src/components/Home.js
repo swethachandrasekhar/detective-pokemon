@@ -7,7 +7,8 @@ class Home extends Component {
   constructor() {
     super();
     this.state = {
-      crimeCategories: [],
+      crimeCategories: [], 
+    //   crimeCategories: {}, 1asdf
       selectedCrime: "",
       selectedLocation: "",
       successPokemonType: "",
@@ -15,10 +16,11 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    // store each properties in an array
+    // store each properties in an array 2asdf
     const crimeArray = Object.keys(crimeCategories);
     this.setState({
-      crimeCategories: crimeArray,
+      crimeCategories: crimeArray, 
+    //   crimeCategories: crimeCategories 3asdf
     });
   }
 
@@ -87,8 +89,10 @@ class Home extends Component {
                 <option key={index} value={category}>
                   {category}
                 </option>
+                // category[readableCrimeName]
               );
             })}
+            
           </select>
 
           <button onClick={this.handleSubmit}>Submit</button>
