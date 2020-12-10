@@ -1,18 +1,16 @@
-import { Component } from 'react';
-import axios from 'axios';
-import { crimeCategories } from '../dataStructures.js'
+import { Component } from "react";
+import axios from "axios";
+import { crimeCategories } from "../dataStructures.js";
 import Pokemons from "./Pokemons.js";
-import Results from './Results.js'
-
-import CrimeLocation from './CrimeLocation.js';
-import CrimeCategories from './CrimeCategories.js';
+import Results from "./Results.js";
+import CrimeLocation from "./CrimeLocation.js";
+import CrimeCategories from "./CrimeCategories.js";
 
 class Home extends Component {
   constructor() {
     super();
     this.state = {
       crimeCategories: [],
-      //   crimeCategories: {}, 1asdf
       selectedCrime: "",
       selectedLocation: "",
       successPokemonType: "",
@@ -23,23 +21,26 @@ class Home extends Component {
   componentDidMount() {
     // store each properties in an array
     const crimeArray = Object.keys(crimeCategories);
+    
     this.setState({
       crimeCategories: crimeArray,
-      //   crimeCategories: crimeCategories 3asdf
     });
   }
 
-  getCrime = (customArea, crimeCategory) => {
-    return axios({
-      url: `https://data.police.uk/api/crimes-street/${crimeCategory}`,
-      responseType: "json",
-      method: "GET",
-      params: {
-        poly: customArea,
-      },
-    });
-  };
+  //Function to make an API call to get Crime Categories from UK Police API
+  // getCrime = (customArea, crimeCategory) => {
+  //   return axios({
+  //     url: `https://data.police.uk/api/crimes-street/${crimeCategory}`,
+  //     responseType: "json",
+  //     method: "GET",
+  //     params: {
+  //       poly: customArea,
+  //     },
+  //   });
+  // };
 
+
+//Function to get success Pokemon Type based on the selected Crime Category
   getPokemonType = (userSelectedCrime) => {
     let successType;
     for (const key in crimeCategories) {
@@ -47,42 +48,44 @@ class Home extends Component {
         successType = crimeCategories[key].successfulType;
       }
     }
-    console.log(successType);
+
     return successType;
   };
 
+//Function to set the user's selected Location
   getLocationChange = (selectedLocation) => {
     this.setState({
       selectedLocation: selectedLocation,
     });
   };
 
+ //Function to set the user's selected Crime Category 
   handleCrime = (selectedCrime) => {
     this.setState({
       selectedCrime: selectedCrime,
     });
   };
 
+
+// Function to handle submit once user has selected the location and crime
+
   handleSubmit = (e) => {
     e.preventDefault();
-
+    //Get the success Pokemon Type and set it in State
     const pokemonType = this.getPokemonType(this.state.selectedCrime);
     this.setState({
       successPokemonType: pokemonType,
     });
   };
 
+ //Function to store the game(win/lose) flag 
   handleGameFlag = (flagValue) => {
-    console.log(`In here handleGameFlag`)
     this.setState({
-      gameFlag: flagValue
-    })
-
-  }
-
+      gameFlag: flagValue,
+    });
+  };
 
   render() {
-    console.log(this.state.successPokemonType);
     return (
       <>
         <form>
@@ -114,12 +117,12 @@ class Home extends Component {
           ) : null}
         </div>
 
+        {/* Display the results page      */}
         <Results
           key={this.state.gameFlag}
           isSuccessfulFlag={this.state.gameFlag}
         />
 
-        <Results isSuccessfulFlag={false}/>
       </>
     );
   }

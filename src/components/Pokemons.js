@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import axios from "axios";
-import { cityCoordinates } from '../dataStructures.js'
+import { cityCoordinates } from "../dataStructures.js";
 
 class Pokemons extends Component {
   constructor() {
@@ -11,77 +11,20 @@ class Pokemons extends Component {
       successPokemonArray: [],
       unSuccessPokemonArray: [],
       cityName: "city",
-      // successPokemonType: this.props.successPokemonType,
     };
   }
 
   componentDidMount() {
-    // console.log(this.props.successPokemonType);
+    //Make a function call to get a list of 5 pokemons
     this.getPokemons(this.props.successPokemonType);
-    // console.log(newPokemonArray);
   }
-  // success pokemon obj in state
-  setArrayOfSuccessPokemonObj = async (succeesPokemonPromise) => {
-    //Push the success pokemon object along with a success flag
-    let successArray = [];
-    for (let i = 0; i < 10; i++) {
-      let pokemObject = await succeesPokemonPromise.data.pokemon[
-        this.getRandomIndex(20)
-      ].pokemon;
-
-      successArray.push(pokemObject);
-    }
-    // pokemObject.match = "success";
-
-    // const tempArray = []
-    // tempArray.push(pokemObject)
-    // console.log(successArray);
-    return successArray;
-    // this.setState({
-    //   successPokemonArray: tempArray
-    // })
-  };
-
-  translateCoordsToCityName = () => {
-    // console.log(this.props.location, this.state.cityName);
-    for (const element of cityCoordinates) {
-      // console.log(element.poly);
-      if (element.poly.toString() === this.props.location.toString()) {
-        this.setState({
-          cityName: element.name,
-        });
-      }
-    }
-    // console.log(this.state.cityName); -- setState delay prevents this from showing correct answer but it works
-  };
-
-  setArrayOfWrongPokemonObj = async () => {
-    // WRONG ANSWERS API CALL =======================
-    //Make an API call to get random pokemon of different types
-    let unsuccessfulPokemonPromises = [];
-    for (let i = 0; i < 10; i++) {
-      unsuccessfulPokemonPromises[i] = await this.getPokemonsAPICall(
-        this.getRandomIndex(17)
-      );
-    }
-
-    //Parse this promise array to create a list of unsuccessful pokemons
-    const unsuccessfulArray = this.parseUnsuccessfulPokemonPromises(
-      unsuccessfulPokemonPromises
-    );
-    // console.log(unsuccessfulArray)
-
-    return unsuccessfulArray;
-  };
 
   getPokemons = async (successPokemonType) => {
-    // RIGHT ANSWERS API CALL =======================
+    // RIGHT ANSWERS API CALL
     //Make an API call to get a list of Pokemons for Successful Pokemon Type
     //Store the top result in the displayPokemons List
-    // let newPokemonArray = [];
-    // console.log(`test`);
+
     let successfulPokemon = await this.getPokemonsAPICall(successPokemonType);
-    // console.log(successfulPokemon);
 
     const successfulArray = await this.setArrayOfSuccessPokemonObj(
       successfulPokemon
@@ -91,25 +34,79 @@ class Pokemons extends Component {
       "correct"
     );
     const unsuccessfulArray = await this.setArrayOfWrongPokemonObj();
-    // console.log(finalSuccessArray);
+
     const finalUnsuccessfulArray = await this.getFinalPokemonDisplayList(
       unsuccessfulArray,
       "wrong"
     );
+
+    //Get the selected City
     this.translateCoordsToCityName();
 
+    // Combine the correct and wrong pokemons to get a final display list
     this.combineArrays(finalSuccessArray, finalUnsuccessfulArray);
   };
 
+  //Function to store 10 success pokemons from the Promise Object
+  setArrayOfSuccessPokemonObj = async (succeesPokemonPromise) => {
+    let successArray = [];
+    for (let i = 0; i < 10; i++) {
+      let pokemObject = await succeesPokemonPromise.data.pokemon[
+        this.getRandomIndex(20)
+      ].pokemon;
+      successArray.push(pokemObject);
+    }
+
+    return successArray;
+  };
+
+  //Function to store 10 wrong pokemons from the Promise Object
+  setArrayOfWrongPokemonObj = async () => {
+    // WRONG ANSWERS API CALL
+    //Make an API call to get random pokemon of different types
+    let unsuccessfulPokemonPromises = [];
+    for (let i = 0; i < 10; i++) {
+      unsuccessfulPokemonPromises[i] = await this.getPokemonsAPICall(
+        this.getRandomIndex(17)
+      );
+    }
+    //Parse this promise array to create a list of unsuccessful pokemons
+    const unsuccessfulArray = this.parseUnsuccessfulPokemonPromises(
+      unsuccessfulPokemonPromises
+    );
+
+    return unsuccessfulArray;
+  };
+
+  //Function to make an API to get the pokemon types
+  getPokemonsAPICall = (PokemonType) => {
+    return axios({
+      method: "GET",
+      url: `https://pokeapi.co/api/v2/type/${PokemonType}`,
+      dataResponse: "json",
+    });
+  };
+
+  //Function to get the selected city
+  translateCoordsToCityName = () => {
+    for (const element of cityCoordinates) {
+      if (element.poly.toString() === this.props.location.toString()) {
+        this.setState({
+          cityName: element.name,
+        });
+      }
+    }
+  };
+
+  //Function to combine the correct and wrong pokemons to get a final display list
   combineArrays = (successArray, unsuccessArray) => {
-    console.log(successArray, unsuccessArray);
     let finalArray = [];
-    // successArray[0] + first 4 items of unsuccessArray
+
     finalArray.push(successArray[0]);
     for (let i = 0; i < 4; i++) {
       finalArray.push(unsuccessArray[i]);
     }
-    console.log(finalArray);
+
     this.shuffle(finalArray);
     console.log(finalArray);
     this.setState({
@@ -117,7 +114,8 @@ class Pokemons extends Component {
     });
   };
 
-  //   Fisher-Yates
+
+  // Fisher-Yates to shuffle the final array everytime before displaying
   shuffle = (array) => {
     let currentIndex = array.length,
       temporaryValue,
@@ -130,22 +128,28 @@ class Pokemons extends Component {
       array[currentIndex] = array[randomIndex];
       array[randomIndex] = temporaryValue;
     }
-    // console.log(array);
+
     return array;
   };
+  
+  
+  //Function to make an API call to each pokemon endpoint to get the pokemon details(like abilities, image, name etc)
   getFinalPokemonDisplayList = async (pokemonArray, flag) => {
-    // console.log(pokemonArray);
+
     let requestPokemonArray = [];
     let allPokeProperties = [];
+    //Create an array of axios calls
     for (let i = 0; i < pokemonArray.length; i++) {
       requestPokemonArray.push(axios.get(pokemonArray[i].url));
     }
 
+    //promise.all to get all the pokemon properties
     const resultPokemonObject = await Promise.all([...requestPokemonArray]);
-    //    console.log(resultPokemonObject)
 
-    resultPokemonObject.forEach((pokemonObj, index) => {
+    resultPokemonObject.forEach((pokemonObj) => {
+
       let onePokeProperties = {};
+       //Pokemon image 
       const pokeImage =
         pokemonObj[`data`][`sprites`][`other`][`official-artwork`][
           `front_default`
@@ -154,14 +158,17 @@ class Pokemons extends Component {
       if (pokeImage !== null) {
 
         const abilities = pokemonObj[`data`][`abilities`];
-        // console.log(abilities)
+
         let abilityArray = [];
+        //Pokemon abilites
         abilities.forEach((ability) => {
           abilityArray.push(ability.ability.name);
         });
-        // console.log(abilityArray);
+
+        //Pokemon Name
         const pokeName = pokemonObj[`data`][`name`];
 
+        //Create an object with all the pokemon properties
         onePokeProperties = {
           name: pokeName,
           abilities: abilityArray,
@@ -169,37 +176,31 @@ class Pokemons extends Component {
           match: flag,
           image: pokeImage,
         };
+        // Push the objects in to an array  
         allPokeProperties.push(onePokeProperties);
       }
     });
     return allPokeProperties;
   };
 
-  getPokemonsAPICall = (PokemonType) => {
-    return axios({
-      method: "GET",
-      url: `https://pokeapi.co/api/v2/type/${PokemonType}`,
-      dataResponse: "json",
-    });
-  };
 
+  //Function that returns a random index
   getRandomIndex = (limit) => {
-    //   get an index between 0 to 9
 
     const index = Math.floor(Math.random() * limit);
+    // If the returned index is 0 make it 1
     return index === 0 ? index + 1 : index;
   };
 
+  //Function to parse a list of wrong pokemon promises
   parseUnsuccessfulPokemonPromises = (PokemonPromises) => {
-    // console.log(PokemonPromises);
     let unSuccessfulPokemonArray = [];
     for (let i = 0; i < PokemonPromises.length; i++) {
-      //   console.log(PokemonPromises[i])
       let pokemObject =
         PokemonPromises[i].data.pokemon[
           this.getRandomIndex(PokemonPromises[i].data.pokemon.length)
         ].pokemon;
-      // console.log(pokemObject);
+
       pokemObject.match = "fail";
 
       unSuccessfulPokemonArray.push(pokemObject);
@@ -208,18 +209,17 @@ class Pokemons extends Component {
     return unSuccessfulPokemonArray;
   };
 
+  //Function to handle the user's pokemon selection
   handlePokemonSelect = (selectedPokemonObject) => {
     console.log(selectedPokemonObject);
-    if(selectedPokemonObject.match === 'correct'){
-      this.props.handleGameFlag(true)
-    } else if (selectedPokemonObject.match === 'wrong'){
+    if (selectedPokemonObject.match === "correct") {
+      this.props.handleGameFlag(true);
+    } else if (selectedPokemonObject.match === "wrong") {
       this.props.handleGameFlag(false);
     }
-  }
+  };
 
   render() {
-    // console.log(this.props);
-    console.log(this.state.displayPokemonList);
     return (
       <>
         <div className="quizMessage">
@@ -271,18 +271,6 @@ class Pokemons extends Component {
               })
             : null}
         </div>
-
-        {/* DISPLAY LIST OF POKEMON OPTIONS */}
-        {/* {this.state.displayPokemonList
-        ? this.state.displayPokemonList.map((pokemon, index) => {
-          return (
-            <article key={`${pokemon.name}${index}`} className="pokeDisplay">
-                <p>{pokemon.name}</p>
-                <img src={pokemon.image} alt="" />
-              </article>
-          )
-        })
-        : null} */}
       </>
     );
   }
