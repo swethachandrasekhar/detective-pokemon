@@ -7,9 +7,7 @@ html{
   background-attachment: fixed;
 }
 
-* {
-  // border: 1px hotpink solid;
-}
+
 
 body {
   font-family: 'Barlow', sans-serif;
@@ -17,6 +15,15 @@ body {
   color: $greywhite;
 }
 
+.content {
+  min-height: calc(100vh - 120px);
+  padding-top: 20px;
+}
+
+html,body {
+  // height: 100%;
+  margin: 0;
+}
 a {
   color: $yellow;
   text-decoration: none;
@@ -61,35 +68,55 @@ article {
         color: $yellow;
         font-size: 2.8rem;
     }
-}
+} 
 
 p {
   font-size: 2.3rem;
 }
 
 
-// experimental css
 
-.content {
-  min-height: calc(100vh - 120px);
-  padding-top: 20px;
-}
-
-html,body {
-  // height: 100%;
-  margin: 0;
-}
-
-footer {
-  height: 90px;
-  // margin-top: -100px;
-}
 
 h1 {
   margin-top: 0;
 }
 
-footer p:nth-of-type(2) {
-  margin-bottom: 0;
-  padding-bottom: 20px;
+footer {
+
+  p {
+  font-size: 1.6rem;
+  color: red;
+  font-weight: bold;
+  
+  }
+
+  a {
+    text-transform: capitalize;
+  }
+  display: flex;
+  padding: 10px;  
+  background-color:$black;
+  text-align: center;
+  justify-content: space-around;
+  
+
+}
+
+
+@media (max-width: 600px){
+
+  footer {
+    flex-wrap: wrap;
+    justify-content: center;
+    p {
+      padding: 2px;
+      margin: 0;
+
+
+    }
+  }
+  .pokemonBall {
+    display: none;
+  }
+
 }
