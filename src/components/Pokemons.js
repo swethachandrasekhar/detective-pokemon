@@ -152,10 +152,7 @@ class Pokemons extends Component {
         ];
 
       if (pokeImage !== null) {
-        // console.log(pokeImage);
-        // const abilities = Object.values(
-        //   pokemonObj[`data`][`abilities`]
-        // );
+
         const abilities = pokemonObj[`data`][`abilities`];
         // console.log(abilities)
         let abilityArray = [];
@@ -176,11 +173,6 @@ class Pokemons extends Component {
       }
     });
     return allPokeProperties;
-
-    //   this .setState({
-    //       displayPokemonList: allPokeProperties
-
-    //   })
   };
 
   getPokemonsAPICall = (PokemonType) => {
