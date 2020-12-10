@@ -8,7 +8,7 @@ html{
 }
 
 * {
-  border: 1px hotpink solid;
+  // border: 1px hotpink solid;
 }
 
 body {
@@ -61,9 +61,50 @@ article {
         color: $yellow;
         font-size: 2.8rem;
     }
-}
+} 
 
 p {
   font-size: 2.3rem;
 }
 
+
+
+footer {
+
+  p {
+  font-size: 1.6rem;
+  color: red;
+  font-weight: bold;
+  
+  }
+
+  a {
+    text-transform: capitalize;
+  }
+  display: flex;
+  padding: 10px;  
+  background-color:$black;
+  text-align: center;
+  justify-content: space-around;
+  
+
+}
+
+
+@media (max-width: 600px){
+
+  footer {
+    flex-wrap: wrap;
+    justify-content: center;
+    p {
+      padding: 2px;
+      margin: 0;
+
+
+    }
+  }
+  .pokemonBall {
+    display: none;
+  }
+
+}
