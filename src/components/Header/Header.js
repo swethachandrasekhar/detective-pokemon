@@ -3,17 +3,10 @@ import NameInput from './NameInput.js';
 // import icon from '../pokemon-icon-2.png'
 
 class Header extends Component{
-    constructor() {
-        super();
-        this.state = {
-            nameToDisplay: ''
-        }
-    }
-    
+
+
     getUsername = (name) => {
-        this.setState({
-            nameToDisplay: name
-        })
+        this.props.getUser(name)
     }
 
     render() {
@@ -32,9 +25,10 @@ class Header extends Component{
                         <NameInput userInput={this.getUsername}/>
 
                         {
-                            this.state.nameToDisplay.trim().length >= 2 
-                                ? <p>Thank you <span>{this.state.nameToDisplay} for joining this fight with us!</span></p>
+                            this.props.username.length >= 2 
+                                ? <p>Thank you <span>{this.props.username} for joining this fight with us!</span></p>
                                 : null
+                                // <p>You must enter a valid name that is more than 1 characters long.</p>
                         }
                         
                     </div>
