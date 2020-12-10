@@ -1,24 +1,26 @@
-import { Component } from 'react';
+import { Component } from "react";
 
 class CrimeCategories extends Component {
 
-    handleCrime = (e) => {
-        this.props.getCrimeChange(e.target.value);
-    };
+  //Function to store the user selected Crime category in the parent component's state  
+  handleCrime = (e) => {
+    this.props.getCrimeChange(e.target.value);
+  };
 
-    render(){
-        return(
-            <select onChange={this.handleCrime}>
-                {this.props.crimeCategoriesArray.map((category, index) => {
-                    return (
-                        <option key={index} value={category}>
-                            {category}
-                        </option>
-                    );
-                })}
-            </select>
-        )
-    }
+  //Renders all the crime categories. These categories where retrieved from UK Police API
+  render() {
+    return (
+      <select onChange={this.handleCrime}>
+        {this.props.crimeCategoriesArray.map((category, index) => {
+          return (
+            <option key={index} value={category}>
+              {category}
+            </option>
+          );
+        })}
+      </select>
+    );
+  }
 }
 
 export default CrimeCategories;
