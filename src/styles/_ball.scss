@@ -1,8 +1,9 @@
 img.ball {
     position: absolute;
-    width: 100px;
-    top: -25px;
-    left: -110px;
+    width: calc(1vw * 7);
+    max-width: 60px;
+    top: -5px;
+    left: -90px;
     animation: MoveUpDown 2s ease-in-out infinite;
 }
 

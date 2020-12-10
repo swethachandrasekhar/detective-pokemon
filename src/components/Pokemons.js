@@ -267,8 +267,7 @@ class Pokemons extends Component {
                           {pokemon.abilities.map((ability, index) => {
                             return (
                               <li key={`${ability}${index}`}>
-                                <span className="ability">{ability}</span>
-                                &nbsp;
+                                {ability}
                               </li>
                             );
                           })}
@@ -284,9 +283,8 @@ class Pokemons extends Component {
           
         }
       </div>
-    );
-        
-   }
+    );        
+  }
 }
 
 export default Pokemons;

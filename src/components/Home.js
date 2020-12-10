@@ -87,8 +87,9 @@ class Home extends Component {
 
   render() {
     return (
-      <>
-        <form>
+      <main>
+        <div className="wrapper">
+        <form name="dropdownForm">
           {/* if selected location not equal to ''
               then show CrimeCategories dropdown and submit button */}
           <CrimeLocation getLocation={this.getLocationChange} />
@@ -96,7 +97,11 @@ class Home extends Component {
           {
             this.state.selectedLocation !== ''
             ? <>
-                <CrimeCategories getCrimeChange={this.handleCrime} crimeCategoriesArray={this.state.crimeCategories}/>
+                <CrimeCategories 
+                  getCrimeChange={this.handleCrime} 
+                  crimeCategoriesArray={this.state.crimeCategories}
+                />
+
                 <button onClick={this.handleSubmit}>Submit</button> 
               </>
             : null
@@ -122,8 +127,8 @@ class Home extends Component {
           key={this.state.gameFlag}
           isSuccessfulFlag={this.state.gameFlag}
         />
-
-      </>
+        </div>
+      </main>
     );
   }
 }
