@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { cityCoordinates } from "../dataStructures.js";
+import Ball from './Ball.js'
 
 class Pokemons extends Component {
   constructor() {
@@ -217,63 +218,75 @@ class Pokemons extends Component {
     } else if (selectedPokemonObject.match === "wrong") {
       this.props.handleGameFlag(false);
     }
+    
   };
 
   render() {
     return (
-      <>
-        <div className="quizMessage">
-          <p>
-            {" "}
-            You are in <span className="chosenCity">{this.state.cityName}</span>
-            , trying to solve a{" "}
-            <span className="chosenCrime">{this.props.crime}</span> type of
-            crime.
-          </p>
-        </div>
+      <div>
+        {
+         
+        this.state.displayPokemonList.length !== 0 ? (
+          <>
+            <div className="quizMessage">
+              <p>
+                {" "}
+                You are in{" "}
+                <span className="chosenCity">{this.state.cityName}</span>,
+                trying to solve a{" "}
+                <span className="chosenCrime">{this.props.crime}</span> type of
+                crime.
+              </p>
+            </div>
 
-        <div className="chooseYourFighter">
-          <p>Choose a Pokemon to help you solve the case:</p>
-        </div>
+            <div className="chooseYourFighter">
+              <p>Choose a Pokemon to help you solve the case:</p>
+            </div>
 
-        <div className="options">
-          {/* DISPLAY LIST OF POKEMON OPTIONS */}
-          {this.state.displayPokemonList
-            ? this.state.displayPokemonList.map((pokemon, pokemonIndex) => {
-                return (
-                  <article
-                    className="pokeDisplay"
-                    key={`${pokemonIndex}${pokemon.name}`}
-                    onClick={() => {
-                      this.handlePokemonSelect(pokemon);
-                    }}
-                  >
-                    <p>{pokemon.name}</p>
+            <div className="options">
+              {/* DISPLAY LIST OF POKEMON OPTIONS */}
+              {this.state.displayPokemonList
+                ? this.state.displayPokemonList.map((pokemon, pokemonIndex) => {
+                    return (
+                      <article
+                        className="pokeDisplay" 
+                        key={`${pokemonIndex}${pokemon.name}`}
+                        onClick={() => {
+                          this.handlePokemonSelect(pokemon);
+                        }}
+                      >
+                        <p>{pokemon.name}</p>
 
-                    <img
-                      src={pokemon.image}
-                      alt={pokemon.name}
-                      key={pokemon.name}
-                    />
+                        <img
+                          src={pokemon.image}
+                          alt={pokemon.name}
+                          key={pokemon.name}
+                        />
 
-                    <ul>
-                      {pokemon.abilities.map((ability, index) => {
-                        return (
-                          <li key={`${ability}${index}`}>
-                            <span className="ability">{ability}</span>
-                            &nbsp;
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </article>
-                );
-              })
-            : null}
-        </div>
-      </>
+                        <ul>
+                          {pokemon.abilities.map((ability, index) => {
+                            return (
+                              <li key={`${ability}${index}`}>
+                                <span className="ability">{ability}</span>
+                                &nbsp;
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </article>
+                    );
+                  })
+                : null}
+            </div>
+          </>
+        ) : 
+        <Ball displayClass='insidePokemon' />
+          
+        }
+      </div>
     );
-  }
+        
+   }
 }
 
 export default Pokemons;

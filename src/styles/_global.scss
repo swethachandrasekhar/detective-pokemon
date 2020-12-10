@@ -7,6 +7,10 @@ html{
   background-attachment: fixed;
 }
 
+* {
+  border: 1px hotpink solid;
+}
+
 body {
   font-family: 'Barlow', sans-serif;
   font-size: 1.8rem;
@@ -62,3 +66,4 @@ article {
 p {
   font-size: 2.3rem;
 }
+
