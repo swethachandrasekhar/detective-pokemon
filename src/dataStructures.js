@@ -23,61 +23,73 @@ export const cityCoordinates = [
 
 export const crimeCategories = {
   "anti-social-behaviour" : { 
+    "readableCrimeName": "antisocial behaviour",
     "successfulType": 14,
     "typeName": "psychic",
     "reason": "Psychic pokemon are able to read and calm minds!"
   },
   "bicycle-theft" : { 
+    "readableCrimeName": "bicycle theft",
     "successfulType": 3,
     "typeName": "flying",
     "reason": "Flying pokemon are able to fly and track the thief!"
   },
   "burglary" : { 
+    "readableCrimeName": "burglary",
     "successfulType": 2,
     "typeName": "fighting",
     "reason": "Fighting pokemon are able to beat the burglar in close quarter combat!"
   },
   "criminal-damage-arson" : { 
+    "readableCrimeName": "criminal damage or arson",
     "successfulType": 11,
     "typeName": "water",
     "reason": "Water pokemon can put out the fire!"
   },
   "drugs" : { 
+    "readableCrimeName": "drugs",
     "successfulType": 4,
     "typeName": "poison",
     "reason": "Poison pokemon can detect drugs and create antidotes!"
   },
   "possession-of-weapons" : { 
+    "readableCrimeName": "possession of weapons",
     "successfulType": 8,
     "typeName": "ghost",
     "reason": "Ghost pokemon can't be hurt by corporeal weapons!"
   },
   "public-order" : { 
+    "readableCrimeName": "public order",
     "successfulType": 12,
     "typeName": "grass",
     "reason": "Grass pokemon can put people to sleep!"
   },
   "robbery" : { 
+    "readableCrimeName": "robbery",
     "successfulType": 13,
     "typeName": "electric",
     "reason": "Electric pokemon can stun the assailant!"
   },
   "shoplifting" : { 
+    "readableCrimeName": "shoplifting",
     "successfulType": 15,
     "typeName": "ice",
     "reason": "Ice pokemon can freeze the shoplifter in place!"
   },
   "theft-from-the-person" : { 
+    "readableCrimeName": "theft from a person",
     "successfulType": 1,
     "typeName": "normal",
     "reason": "Normal pokemon can stop theft from the person!"
   },
   "vehicle-crime" : { 
+    "readableCrimeName": "vehicle crime",
     "successfulType": 16,
     "typeName": "dragon",
     "reason": "Dragon pokemon can fly and stop a car!"
   },
   "violent-crime" : { 
+    "readableCrimeName": "violent crime",
     "successfulType": 18,
     "typeName": "fairy",
     "reason": "Fairy pokemon can turn any cruel person into a nice one!"

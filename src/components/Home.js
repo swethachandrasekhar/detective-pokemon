@@ -10,8 +10,7 @@ class Home extends Component {
       crimeCategories: [],
       selectedCrime: "",
       selectedLocation: "",
-     
-      successPokemonType: '',
+      successPokemonType: "",
     };
   }
 
@@ -102,6 +101,7 @@ class Home extends Component {
               key={this.state.successPokemonType}
               crime={this.state.selectedCrime}
               successPokemonType={this.state.successPokemonType}
+              location={this.state.selectedLocation}
             />
           ) : null}
         </div>
