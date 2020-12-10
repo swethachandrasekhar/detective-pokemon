@@ -2,6 +2,7 @@ import { Component } from 'react';
 import axios from 'axios';
 import { crimeCategories } from '../dataStructures.js'
 import Pokemons from "./Pokemons.js";
+import Results from './Results.js'
 
 import CrimeLocation from './CrimeLocation.js';
 import CrimeCategories from './CrimeCategories.js';
@@ -93,6 +94,8 @@ class Home extends Component {
             />
           ) : null}
         </div>
+
+        <Results isSuccessfulFlag={false}/>
 
          {/* <div className="pokeDisplay">
              <article>
