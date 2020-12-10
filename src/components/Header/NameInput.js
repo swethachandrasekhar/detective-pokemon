@@ -1,5 +1,5 @@
 import { Component } from "react";
-
+import Ball from "../Ball.js";
 class NameInput extends Component {
   constructor() {
     super();
@@ -25,7 +25,10 @@ class NameInput extends Component {
   render() {
     return (
       <form name="userName" className="userNameForm">
-        <label htmlFor="nameInput">Your name: </label>
+        <label htmlFor="nameInput">
+          Your name:
+          <Ball displayClass="ball" />
+        </label>
         <input
           onChange={this.handleChange}
           type="text"
