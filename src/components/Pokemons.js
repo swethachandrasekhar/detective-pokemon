@@ -19,9 +19,8 @@ class Pokemons extends Component {
     // console.log(this.props.successPokemonType);
     this.getPokemons(this.props.successPokemonType);
     // console.log(newPokemonArray);
-    this.translateCoordsToCityName();
-  }
-
+   
+  };
   // success pokemon obj in state
   setArrayOfSuccessPokemonObj = async (succeesPokemonPromise) => {
     //Push the success pokemon object along with a success flag
@@ -76,7 +75,6 @@ class Pokemons extends Component {
   }
 
   getPokemons = async (successPokemonType) => {
-
     // RIGHT ANSWERS API CALL =======================
     //Make an API call to get a list of Pokemons for Successful Pokemon Type
     //Store the top result in the displayPokemons List
@@ -84,12 +82,22 @@ class Pokemons extends Component {
     // console.log(`test`);
     let successfulPokemon = await this.getPokemonsAPICall(successPokemonType);
     // console.log(successfulPokemon);
-    
-    const successfulArray = await this.setArrayOfSuccessPokemonObj(successfulPokemon);
-    const finalSuccessArray = await this.getFinalPokemonDisplayList(successfulArray, 'correct');
+
+    const successfulArray = await this.setArrayOfSuccessPokemonObj(
+      successfulPokemon
+    );
+    const finalSuccessArray = await this.getFinalPokemonDisplayList(
+      successfulArray,
+      "correct"
+    );
     const unsuccessfulArray = await this.setArrayOfWrongPokemonObj();
     // console.log(finalSuccessArray);
-    const finalUnsuccessfulArray = await this.getFinalPokemonDisplayList(unsuccessfulArray, 'wrong');
+    const finalUnsuccessfulArray = await this.getFinalPokemonDisplayList(
+      unsuccessfulArray,
+      "wrong"
+    );
+    this.translateCoordsToCityName();
+  
     this.combineArrays(finalSuccessArray, finalUnsuccessfulArray);
     
   };
@@ -218,41 +226,56 @@ class Pokemons extends Component {
     console.log(this.state.displayPokemonList);
     return (
       <>
-
-        <div className="quizMessage">
-          <p> You are in <span className="chosenCity">{this.state.cityName}</span>, trying to solve a <span className="chosenCrime">{this.props.crime}</span> type of crime.
+        <div className="quizMessage" key="quizMessage">
+          <p>
+            {" "}
+            You are in <span className="chosenCity">{this.state.cityName}</span>
+            , trying to solve a{" "}
+            <span className="chosenCrime">{this.props.crime}</span> type of
+            crime.
           </p>
         </div>
 
-        <div className="chooseYourFighter">
+        <div className="chooseYourFighter" key="chooseYourFighter">
           <p>Choose a Pokemon to help you solve the case:</p>
         </div>
 
-        <div className="options">
+        <div className="options" key="options">
           {/* DISPLAY LIST OF POKEMON OPTIONS */}
           {this.state.displayPokemonList
-          ? this.state.displayPokemonList.map((pokemon, index) => {
-            return (
-                <article className="pokeDisplay">
-                  <p>{pokemon.name}</p>
+            ? this.state.displayPokemonList.map((pokemon, pokemonIndex) => {
+                return (
+                  <article
+                    className="pokeDisplay"
+                    key={`${pokemonIndex}${pokemon.name}`}
+                  >
+                    <p>{pokemon.name}</p>
 
-                  <img src={pokemon.image} alt="" />
+                    <img
+                      src={pokemon.image}
+                      alt={pokemon.name}
+                      key={pokemon.name}
+                    />
 
-                  <p> 
-                    {pokemon.abilities.map((ability) => {
+                    <p>
+                      {pokemon.abilities.map((ability, index) => {
                         return (
                           <>
-                            <span key={`${pokemon.name}${index}`} className="ability">{ability}</span>
+                            <span
+                              key={`${ability}${index}`}
+                              className="ability"
+                            >
+                              {ability}
+                            </span>
                             &nbsp;
-                            </>
-                        )
-                    })}
-                  </p>
-                  
-                </article>
-            )
-          })
-          : null}
+                          </>
+                        );
+                      })}
+                    </p>
+                  </article>
+                );
+              })
+            : null}
         </div>
 
         {/* DISPLAY LIST OF POKEMON OPTIONS */}
@@ -267,7 +290,7 @@ class Pokemons extends Component {
         })
         : null} */}
       </>
-    )
+    );
   }
 }
 
