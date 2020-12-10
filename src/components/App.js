@@ -7,11 +7,24 @@ import Footer from './Footer.js';
 import Ball from './Ball.js';
 
 class App extends Component {
+  constructor(){
+    super();
+    this.state ={
+      user: ''
+    }
+  }
+
+ grabUsername = (name) => {
+    this.setState({
+      user: name
+    })
+ }
+
   render() {
     return (
       <>
         <Ball />
-        <Header />
+        <Header getUser={this.grabUsername} username={this.state.user}/>
         <Home />
         <Footer />
       </>

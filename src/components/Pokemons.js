@@ -95,8 +95,6 @@ class Pokemons extends Component {
     this.setState({
       displayPokemonList: finalArray,
     });
-
-
   }
 
 //   Fisher-Yates 
@@ -210,17 +208,15 @@ class Pokemons extends Component {
 
         {/* DISPLAY LIST OF POKEMON OPTIONS */}
         {this.state.displayPokemonList
-        ? this.state.displayPokemonList.map((pokemon) => {
+        ? this.state.displayPokemonList.map((pokemon, index) => {
           return (
-            <>
-              <article className="pokeDisplay">
+            <article key={`${pokemon.name}${index}`} className="pokeDisplay">
                 <p>{pokemon.name}</p>
                 <img src={pokemon.image} alt="" />
               </article>
-            </>
           )
         })
-        : null};
+        : null}
       </>
     )
   }
