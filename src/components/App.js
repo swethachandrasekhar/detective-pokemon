@@ -23,14 +23,19 @@ class App extends Component {
   render() {
     return (
       <>
-       
-        <Header getUser={this.grabUsername} username={this.state.user}/>
+        <div className="content">
 
-        {
-          this.state.user.length >= 2
-            ? <Home />
-            : null
-        }
+          <Header getUser={this.grabUsername} username={this.state.user}/>
+
+          {
+            this.state.user.length >= 2
+              ? <Home
+                userName={this.state.user}
+                 />
+              : null
+          }
+
+        </div>
         
         <Footer />
       </>
