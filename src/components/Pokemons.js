@@ -4,13 +4,13 @@ import { cityCoordinates } from '../dataStructures.js'
 
 class Pokemons extends Component {
   constructor() {
-    super();   
+    super();
     this.state = {
       displayPokemonList: [],
       pokemonList: [],
       successPokemonArray: [],
       unSuccessPokemonArray: [],
-      cityName: 'city'
+      cityName: "city",
       // successPokemonType: this.props.successPokemonType,
     };
   }
@@ -19,18 +19,17 @@ class Pokemons extends Component {
     // console.log(this.props.successPokemonType);
     this.getPokemons(this.props.successPokemonType);
     // console.log(newPokemonArray);
-   
-  };
+  }
   // success pokemon obj in state
   setArrayOfSuccessPokemonObj = async (succeesPokemonPromise) => {
     //Push the success pokemon object along with a success flag
-    let successArray = []
-    for (let i =0; i< 10; i++){
+    let successArray = [];
+    for (let i = 0; i < 10; i++) {
+      let pokemObject = await succeesPokemonPromise.data.pokemon[
+        this.getRandomIndex(20)
+      ].pokemon;
 
-        let pokemObject =
-         await succeesPokemonPromise.data.pokemon[this.getRandomIndex(20)].pokemon;
-
-          successArray.push(pokemObject);
+      successArray.push(pokemObject);
     }
     // pokemObject.match = "success";
 
@@ -41,8 +40,7 @@ class Pokemons extends Component {
     // this.setState({
     //   successPokemonArray: tempArray
     // })
-
-  }
+  };
 
   translateCoordsToCityName = () => {
     // console.log(this.props.location, this.state.cityName);
@@ -50,19 +48,21 @@ class Pokemons extends Component {
       // console.log(element.poly);
       if (element.poly.toString() === this.props.location.toString()) {
         this.setState({
-          cityName: element.name
-        }) 
-      };
-    };
+          cityName: element.name,
+        });
+      }
+    }
     // console.log(this.state.cityName); -- setState delay prevents this from showing correct answer but it works
-  }
+  };
 
   setArrayOfWrongPokemonObj = async () => {
     // WRONG ANSWERS API CALL =======================
     //Make an API call to get random pokemon of different types
     let unsuccessfulPokemonPromises = [];
     for (let i = 0; i < 10; i++) {
-      unsuccessfulPokemonPromises[i] = await this.getPokemonsAPICall(this.getRandomIndex(17));
+      unsuccessfulPokemonPromises[i] = await this.getPokemonsAPICall(
+        this.getRandomIndex(17)
+      );
     }
 
     //Parse this promise array to create a list of unsuccessful pokemons
@@ -72,7 +72,7 @@ class Pokemons extends Component {
     // console.log(unsuccessfulArray)
 
     return unsuccessfulArray;
-  }
+  };
 
   getPokemons = async (successPokemonType) => {
     // RIGHT ANSWERS API CALL =======================
@@ -97,95 +97,91 @@ class Pokemons extends Component {
       "wrong"
     );
     this.translateCoordsToCityName();
-  
+
     this.combineArrays(finalSuccessArray, finalUnsuccessfulArray);
-    
   };
 
-
-  combineArrays = (successArray , unsuccessArray) => {
-
+  combineArrays = (successArray, unsuccessArray) => {
     console.log(successArray, unsuccessArray);
     let finalArray = [];
     // successArray[0] + first 4 items of unsuccessArray
     finalArray.push(successArray[0]);
-    for(let i =0; i < 4; i++){
-        finalArray.push(unsuccessArray[i]);
+    for (let i = 0; i < 4; i++) {
+      finalArray.push(unsuccessArray[i]);
     }
-    console.log(finalArray)
+    console.log(finalArray);
     this.shuffle(finalArray);
     console.log(finalArray);
     this.setState({
       displayPokemonList: finalArray,
     });
-  }
+  };
 
-//   Fisher-Yates 
-    shuffle = (array) => {
-        let currentIndex = array.length, temporaryValue, randomIndex;
+  //   Fisher-Yates
+  shuffle = (array) => {
+    let currentIndex = array.length,
+      temporaryValue,
+      randomIndex;
 
-        while (currentIndex !== 0) {
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex -= 1;
-            temporaryValue = array[currentIndex];
-            array[currentIndex] = array[randomIndex];
-            array[randomIndex] = temporaryValue;
-  }
+    while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
     // console.log(array);
     return array;
-};
+  };
   getFinalPokemonDisplayList = async (pokemonArray, flag) => {
     // console.log(pokemonArray);
     let requestPokemonArray = [];
     let allPokeProperties = [];
     for (let i = 0; i < pokemonArray.length; i++) {
-      requestPokemonArray.push(axios.get(pokemonArray[i].url))
+      requestPokemonArray.push(axios.get(pokemonArray[i].url));
     }
 
-    
-   const resultPokemonObject =  await Promise.all([...requestPokemonArray]);
-//    console.log(resultPokemonObject)
+    const resultPokemonObject = await Promise.all([...requestPokemonArray]);
+    //    console.log(resultPokemonObject)
 
-            resultPokemonObject.forEach((pokemonObj, index) => {
-              let onePokeProperties = {};
-              const pokeImage =
-                pokemonObj[`data`][`sprites`][`other`][`official-artwork`][
-                  `front_default`
-                ];
+    resultPokemonObject.forEach((pokemonObj, index) => {
+      let onePokeProperties = {};
+      const pokeImage =
+        pokemonObj[`data`][`sprites`][`other`][`official-artwork`][
+          `front_default`
+        ];
 
-              if (pokeImage !== null) {
-                // console.log(pokeImage);
-                // const abilities = Object.values(
-                //   pokemonObj[`data`][`abilities`]
-                // );
-                const abilities = pokemonObj[`data`][`abilities`];
-                // console.log(abilities)
-                let abilityArray = [];
-                abilities.forEach((ability) => {
-                  abilityArray.push(ability.ability.name);
-                });
-                // console.log(abilityArray);
-                const pokeName = pokemonObj[`data`][`name`];
-               
-                onePokeProperties = {
-                  name: pokeName,
-                  abilities: abilityArray,
-                  id: pokemonObj[`data`][`id`],
-                  match: flag,
-                  image: pokeImage,
-                };
-                allPokeProperties.push(onePokeProperties);
-              }
-            });
-            return allPokeProperties;
+      if (pokeImage !== null) {
+        // console.log(pokeImage);
+        // const abilities = Object.values(
+        //   pokemonObj[`data`][`abilities`]
+        // );
+        const abilities = pokemonObj[`data`][`abilities`];
+        // console.log(abilities)
+        let abilityArray = [];
+        abilities.forEach((ability) => {
+          abilityArray.push(ability.ability.name);
+        });
+        // console.log(abilityArray);
+        const pokeName = pokemonObj[`data`][`name`];
 
-        //   this .setState({
-        //       displayPokemonList: allPokeProperties
+        onePokeProperties = {
+          name: pokeName,
+          abilities: abilityArray,
+          id: pokemonObj[`data`][`id`],
+          match: flag,
+          image: pokeImage,
+        };
+        allPokeProperties.push(onePokeProperties);
+      }
+    });
+    return allPokeProperties;
 
-        //   })
-         
- }
+    //   this .setState({
+    //       displayPokemonList: allPokeProperties
 
+    //   })
+  };
 
   getPokemonsAPICall = (PokemonType) => {
     return axios({
@@ -198,7 +194,7 @@ class Pokemons extends Component {
   getRandomIndex = (limit) => {
     //   get an index between 0 to 9
 
-    const index = Math.floor(Math.random() * limit) ;
+    const index = Math.floor(Math.random() * limit);
     return index === 0 ? index + 1 : index;
   };
 
@@ -206,10 +202,9 @@ class Pokemons extends Component {
     // console.log(PokemonPromises);
     let unSuccessfulPokemonArray = [];
     for (let i = 0; i < PokemonPromises.length; i++) {
-    //   console.log(PokemonPromises[i])
+      //   console.log(PokemonPromises[i])
       let pokemObject =
-        PokemonPromises[i].data
-        .pokemon[
+        PokemonPromises[i].data.pokemon[
           this.getRandomIndex(PokemonPromises[i].data.pokemon.length)
         ].pokemon;
       // console.log(pokemObject);
@@ -220,6 +215,15 @@ class Pokemons extends Component {
 
     return unSuccessfulPokemonArray;
   };
+
+  handlePokemonSelect = (selectedPokemonObject) => {
+    console.log(selectedPokemonObject);
+    if(selectedPokemonObject.match === 'correct'){
+      this.props.handleGameFlag(true)
+    } else if (selectedPokemonObject.match === 'wrong'){
+      this.props.handleGameFlag(false);
+    }
+  }
 
   render() {
     // console.log(this.props);
@@ -248,6 +252,9 @@ class Pokemons extends Component {
                   <article
                     className="pokeDisplay"
                     key={`${pokemonIndex}${pokemon.name}`}
+                    onClick={() => {
+                      this.handlePokemonSelect(pokemon);
+                    }}
                   >
                     <p>{pokemon.name}</p>
 

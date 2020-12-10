@@ -11,20 +11,21 @@ class Home extends Component {
   constructor() {
     super();
     this.state = {
-      crimeCategories: [], 
-    //   crimeCategories: {}, 1asdf
+      crimeCategories: [],
+      //   crimeCategories: {}, 1asdf
       selectedCrime: "",
       selectedLocation: "",
       successPokemonType: "",
+      gameFlag: "",
     };
   }
 
   componentDidMount() {
-    // store each properties in an array 2asdf
+    // store each properties in an array
     const crimeArray = Object.keys(crimeCategories);
     this.setState({
-      crimeCategories: crimeArray, 
-    //   crimeCategories: crimeCategories 3asdf
+      crimeCategories: crimeArray,
+      //   crimeCategories: crimeCategories 3asdf
     });
   }
 
@@ -64,21 +65,33 @@ class Home extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    
+
     const pokemonType = this.getPokemonType(this.state.selectedCrime);
     this.setState({
-        successPokemonType: pokemonType
-    })
+      successPokemonType: pokemonType,
+    });
   };
 
+  handleGameFlag = (flagValue) => {
+    console.log(`In here handleGameFlag`)
+    this.setState({
+      gameFlag: flagValue
+    })
+
+  }
+
+
   render() {
-      console.log(this.state.successPokemonType);
+    console.log(this.state.successPokemonType);
     return (
       <>
         <form>
           <CrimeLocation getLocation={this.getLocationChange} />
 
-          <CrimeCategories getCrimeChange={this.handleCrime} crimeCategoriesArray={this.state.crimeCategories}/>
+          <CrimeCategories
+            getCrimeChange={this.handleCrime}
+            crimeCategoriesArray={this.state.crimeCategories}
+          />
 
           <button onClick={this.handleSubmit}>Submit</button>
         </form>
@@ -91,13 +104,17 @@ class Home extends Component {
               crime={this.state.selectedCrime}
               successPokemonType={this.state.successPokemonType}
               location={this.state.selectedLocation}
+              handleGameFlag={this.handleGameFlag}
             />
           ) : null}
         </div>
 
-        <Results isSuccessfulFlag={false}/>
+        <Results
+          key={this.state.gameFlag}
+          isSuccessfulFlag={this.state.gameFlag}
+        />
 
-         {/* <div className="pokeDisplay">
+        {/* <div className="pokeDisplay">
              <article>
                 <img src="" alt=""/>
                 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cupiditate, ducimus expedita, enim porro, aspiditate ea deserunt facere impedit esse distinctio suscipit, rem sequi ipsa tempora maxime nesciunt. Qui provident cupiditate temporibus.</p>
