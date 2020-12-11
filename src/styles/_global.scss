@@ -1,16 +1,14 @@
-html{
+html {
   font-size: 62.5%;
   background-color: $red;
-  background: url('../assets/detectivepikachu-bg-crop-tight.jpeg');
+  background: url("../assets/detectivepikachu-bg-crop-tight.jpeg");
   background-size: cover;
   background-position: right;
   background-attachment: fixed;
 }
 
-
-
 body {
-  font-family: 'Barlow', sans-serif;
+  font-family: "Barlow", sans-serif;
   font-size: 1.8rem;
   color: $greywhite;
 }
@@ -30,8 +28,11 @@ a {
   text-transform: uppercase;
 }
 
-h1,h2 {
-  font-family: 'Iceberg', cursive;
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Iceberg", cursive;
   color: $yellow;
 }
 
@@ -40,7 +41,7 @@ h1 {
   border-radius: 2rem;
   font-size: 6rem;
   background-color: $black;
-//   width: 500px;
+  //   width: 500px;
 }
 
 .wrapper {
@@ -49,7 +50,7 @@ h1 {
   width: 90%;
 }
 
-header{
+header {
   text-align: center;
   // height: 100vh;
 }
@@ -60,20 +61,37 @@ article {
   background-color: $red;
   border-radius: 25px;
   border: 4px solid $lightartificialgreen;
-    img {
-      border-radius: 50%;
-    }
-    p {
-        text-align: center;
-        color: $yellow;
-        font-size: 2.8rem;
-    }
-} 
+  img {
+    border-radius: 50%;
+  }
+  p {
+    text-align: center;
+    color: $yellow;
+    font-size: 2.8rem;
+  }
+}
 
 p {
   font-size: 2.3rem;
 }
 
+[name='dropdownForm']{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+[name='dropdownForm'] button{
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: $yellow;
+}
+
+select {
+  padding: 10px;
+  margin-right: 10px;
+  background-color: $lightartificialgreen;
+}
 
 
 
@@ -85,20 +103,22 @@ footer {
 
   p {
   font-size: 1.6rem;
-  color: red;
+  color: $red;
   font-weight: bold;
-  
   }
 
   a {
     text-transform: capitalize;
   }
-  display: flex;
-  padding: 10px;  
-  background-color:$black;
-  text-align: center;
-  justify-content: space-around;
-  
+
+  .wrapper{
+    display: flex;
+    padding: 10px;  
+    background-color:$black;
+    justify-content: space-between;
+    border: 5px solid $red;
+    border-radius: 15px;
+  }
 
 }
 
@@ -111,10 +131,9 @@ footer {
     p {
       padding: 2px;
       margin: 0;
-
-
     }
   }
+
   .pokemonBall {
     display: none;
   }
