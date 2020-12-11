@@ -17,6 +17,7 @@ class Home extends Component {
       selectedLocation: "",
       successPokemonType: "",
       gameFlag: "",
+      chosenPokeName: "",
     };
   }
 
@@ -86,9 +87,10 @@ class Home extends Component {
   };
 
  //Function to store the game(win/lose) flag 
-  handleGameFlag = (flagValue) => {
+  handleGameFlag = (flagValue, chosenPokeName) => {
     this.setState({
       gameFlag: flagValue,
+      chosenPokeName: chosenPokeName,
     }, () => {
       window.scrollTo({
         top: this.resultsSection.current.offsetTop
@@ -135,6 +137,8 @@ class Home extends Component {
           <Results
             key={this.state.gameFlag}
             isSuccessfulFlag={this.state.gameFlag}
+            userName={this.props.userName}
+            chosenPokeName={this.state.chosenPokeName}
           />
         </div>
 

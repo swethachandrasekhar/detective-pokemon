@@ -214,9 +214,9 @@ class Pokemons extends Component {
   handlePokemonSelect = (selectedPokemonObject) => {
     console.log(selectedPokemonObject);
     if (selectedPokemonObject.match === "correct") {
-      this.props.handleGameFlag(true);
+      this.props.handleGameFlag(true, selectedPokemonObject.name);
     } else if (selectedPokemonObject.match === "wrong") {
-      this.props.handleGameFlag(false);
+      this.props.handleGameFlag(false, selectedPokemonObject.name);
     }
     
   };

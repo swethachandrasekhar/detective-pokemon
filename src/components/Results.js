@@ -16,13 +16,13 @@ class Results extends Component {
     } else if (this.props.isSuccessfulFlag === false) {
       return (
         <div className="resultsSection">
-          <h3>Sorry, that was the wrong selection</h3>
+          <h3>Sorry {this.props.userName}, {this.props.chosenPokeName} was the wrong selection</h3>
         </div>
       );
     } else {
       return (
         <div className="resultsSection">
-          <h3>Great job! This guy's good</h3>
+          <h3>Great job {this.props.userName}! {this.props.chosenPokeName} is right for the job</h3>
         </div>
       );
     }
