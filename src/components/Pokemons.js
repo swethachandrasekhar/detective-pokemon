@@ -214,12 +214,13 @@ class Pokemons extends Component {
   handlePokemonSelect = (selectedPokemonObject) => {
     console.log(selectedPokemonObject);
     if (selectedPokemonObject.match === "correct") {
-      this.props.handleGameFlag(true);
+      this.props.handleGameFlag(true, selectedPokemonObject.name, selectedPokemonObject.image);
     } else if (selectedPokemonObject.match === "wrong") {
-      this.props.handleGameFlag(false);
+      this.props.handleGameFlag(false, selectedPokemonObject.name, selectedPokemonObject.image);
     }
     
   };
+
 
   render() {
     return (
@@ -255,7 +256,7 @@ class Pokemons extends Component {
                           this.handlePokemonSelect(pokemon);
                         }}
                       >
-                        <p>{pokemon.name}</p>
+                        <p>{this.props.capitalizeFirstLetter(pokemon.name)}</p>
 
                         <img
                           src={pokemon.image}
