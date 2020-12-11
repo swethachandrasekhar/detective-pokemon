@@ -20,7 +20,7 @@ class NameInput extends Component {
 //Store the name in App.js state
   handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(this.state.userName.length);
+    
     if (this.state.userName.length > 1) {
       this.props.userInput(this.state.userName, true);
       this.setState({
@@ -28,7 +28,7 @@ class NameInput extends Component {
       })
     } else {
       // 
-      console.log(`not long enough`);
+      
       this.setState({
         userNameTooSmall: true
       })
