@@ -1,3 +1,5 @@
+// we borrowed some of this stuff from the good folks here: https://github.com/heathergh/detective-pokemon
+
 export const cityCoordinates = [
   {
     "name":"London",
