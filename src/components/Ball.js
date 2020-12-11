@@ -2,9 +2,10 @@ import ball from "../assets/pokeball-transp.png";
 //importing PokemonGo logo
 const Ball = (props) => {
   return (
-    <>
-      <img src={ball} alt="The PokemonGo logo" className={`pokemonBall ${props.displayClass}`} />
-    </>
+    <div className="loadingContainer">
+      <h3>Loading...</h3>
+      <img src={ball} alt="The PokemonGo logo" className={`pokemonBall loading ${props.displayClass}`} />
+    </div>
   );
 };
 

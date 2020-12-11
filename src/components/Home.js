@@ -30,19 +30,6 @@ class Home extends Component {
     });
   }
 
-  //Function to make an API call to get Crime Categories from UK Police API
-  // getCrime = (customArea, crimeCategory) => {
-  //   return axios({
-  //     url: `https://data.police.uk/api/crimes-street/${crimeCategory}`,
-  //     responseType: "json",
-  //     method: "GET",
-  //     params: {
-  //       poly: customArea,
-  //     },
-  //   });
-  // };
-
-
 //Function to get success Pokemon Type based on the selected Crime Category
   getPokemonType = (userSelectedCrime) => {
     let successType;
@@ -146,15 +133,17 @@ class Home extends Component {
         </div>
 
         {/* Display the results page      */}
-          <Results
-            key={this.state.gameFlag}
-            isSuccessfulFlag={this.state.gameFlag}
-            userName={this.props.userName}
-            chosenPokeName={this.state.chosenPokeName}
-            chosenPokeImageUrl={this.state.chosenPokeImageUrl}
-            selectedCrime={this.state.selectedCrime}
-            capitalizeFirstLetter={this.capitalizeFirstLetter}
-          />
+          <div ref={this.resultsSection}>
+            <Results
+              key={this.state.gameFlag}
+              isSuccessfulFlag={this.state.gameFlag}
+              userName={this.props.userName}
+              chosenPokeName={this.state.chosenPokeName}
+              chosenPokeImageUrl={this.state.chosenPokeImageUrl}
+              selectedCrime={this.state.selectedCrime}
+              capitalizeFirstLetter={this.capitalizeFirstLetter}
+            />
+          </div>
         </div>
       </main>
     );

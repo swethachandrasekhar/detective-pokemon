@@ -280,9 +280,10 @@ class Pokemons extends Component {
             </div>
           </>
         ) : 
-        // <Ball displayClass='insidePokemon' />
-        <Ball />
+          <>
           
+            <Ball />
+          </>
         }
       </div>
     );        
