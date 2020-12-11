@@ -16,6 +16,8 @@ class Home extends Component {
       selectedLocation: "",
       successPokemonType: "",
       gameFlag: "",
+      chosenPokeName: "",
+      chosenPokeImageUrl: "",
     };
   }
 
@@ -27,19 +29,6 @@ class Home extends Component {
       crimeCategories: crimeArray,
     });
   }
-
-  //Function to make an API call to get Crime Categories from UK Police API
-  // getCrime = (customArea, crimeCategory) => {
-  //   return axios({
-  //     url: `https://data.police.uk/api/crimes-street/${crimeCategory}`,
-  //     responseType: "json",
-  //     method: "GET",
-  //     params: {
-  //       poly: customArea,
-  //     },
-  //   });
-  // };
-
 
 //Function to get success Pokemon Type based on the selected Crime Category
   getPokemonType = (userSelectedCrime) => {
@@ -85,17 +74,25 @@ class Home extends Component {
   };
 
  //Function to store the game(win/lose) flag 
-  handleGameFlag = (flagValue) => {
+  handleGameFlag = (flagValue, chosenPokeName, chosenPokeImageUrl) => {
+    console.log(chosenPokeImageUrl);
     this.setState({
       gameFlag: flagValue,
+      chosenPokeName: chosenPokeName,
+      chosenPokeImageUrl: chosenPokeImageUrl
     }, () => {
       window.scrollTo({
         top: this.resultsSection.current.offsetTop
       });
+      console.log(this.state.chosenPokeImageUrl);
     }
     
     );
   };
+
+  capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
 
   render() {
     return (
@@ -130,6 +127,7 @@ class Home extends Component {
               successPokemonType={this.state.successPokemonType}
               location={this.state.selectedLocation}
               handleGameFlag={this.handleGameFlag}
+              capitalizeFirstLetter={this.capitalizeFirstLetter}
             />
           ) : null}
         </div>
@@ -141,6 +139,9 @@ class Home extends Component {
               isSuccessfulFlag={this.state.gameFlag}
               userName={this.props.userName}
               chosenPokeName={this.state.chosenPokeName}
+              chosenPokeImageUrl={this.state.chosenPokeImageUrl}
+              selectedCrime={this.state.selectedCrime}
+              capitalizeFirstLetter={this.capitalizeFirstLetter}
             />
           </div>
         </div>

@@ -1,11 +1,54 @@
 .resultsSection {
+    display: grid;
+    align-items: center;
+    justify-items: center;
     background-color: $yellow;
     border: 7px solid $lightartificialgreen;
     border-radius: 2rem;
     padding: 20px;
     margin: 10px;
+    text-align: center;
+    min-height: calc(100vh - 100px);
+    p {
+        color: $black;
+        line-height: 180%;
+    }
 }
 
 h3 {
     color: $black;
+    font-size: 6rem;
+    font-family: 'Iceberg', cursive;
+    font-style: italic;
+}
+.resultPokeName, .resultCrimeName {
+    background-color: $red;
+    padding: 4px 6px;
+    border-radius: 15px;
+    color: $greywhite;
+    font-weight: bold;
+}
+
+.resultsImagesDiv {
+    position: relative;
+    border-radius: 50%;
+    background-color: $black;
+}
+.winner {
+    border: 30px solid $lightartificialgreen;
+}
+.loser {
+    border: 30px solid #fe0000;
+}
+img.redX {
+    position: absolute;
+    top: 130px;
+    left: 40px;
+    width: 80%;
+}
+img.greenCirc {
+    position: absolute;
+    top: -25px;
+    left: -25px;
+    width: 110%;
 }
