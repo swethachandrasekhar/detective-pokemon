@@ -6,7 +6,6 @@
     border: 7px solid $lightartificialgreen;
     border-radius: 2rem;
     padding: 20px;
-    margin: 10px;
     text-align: center;
     min-height: calc(100vh - 100px);
     p {
@@ -33,18 +32,25 @@ h3 {
     position: relative;
     border-radius: 50%;
     background-color: $black;
+    img{
+        width: 100%;
+        max-width: 400px;
+    }
 }
 .winner {
     border: 30px solid $lightartificialgreen;
 }
+
 .loser {
-    border: 30px solid #fe0000;
+    border: 30px solid $red;
 }
+
 img.redX {
     position: absolute;
-    top: 130px;
-    left: 40px;
+    top: 50px;
+    left: 50%;
     width: 80%;
+    transform: translateX(-50%);
 }
 img.greenCirc {
     position: absolute;
