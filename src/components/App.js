@@ -29,6 +29,14 @@ class App extends Component {
    })
  }
 
+ reset = () => {
+   this.setState({
+      isNameSubmit: false,
+      user: ''
+   })
+ }
+
+
   render() {
     return (
       <>
@@ -62,6 +70,7 @@ class App extends Component {
               ? <Home
                 userName={this.state.user}
                 isQuizzed={this.isQuizzed} 
+                reset={this.reset}
                 />
               : null
           }

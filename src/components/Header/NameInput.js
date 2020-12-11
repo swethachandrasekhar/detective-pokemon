@@ -48,6 +48,7 @@ class NameInput extends Component {
             type="text"
             name="nameInput"
             id="nameInput"
+            placeholder="Your name here"
           />
 
           <button className="nameButton" onClick={this.handleSubmit}>
