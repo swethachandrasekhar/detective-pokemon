@@ -29,6 +29,14 @@ input {
   padding: 10px 30px 10px 5px;
 }
 
+.charWarning {
+  margin-top: 1px;
+  font-size: 2rem;
+}
+.charWarningText {
+  font-style: italic;
+}
+
 @media (max-width: 720px){
   .introText p{
     font-size: calc(1vw + 1.6rem);

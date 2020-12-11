@@ -38,7 +38,10 @@ class App extends Component {
           </div>
           {
             !this.state.isNameSubmit 
-            ? <Header getUser={this.grabUsername} username={this.state.user}/>
+            ? <Header 
+                getUser={this.grabUsername} 
+                username={this.state.user}
+              />
             : null
           }
           

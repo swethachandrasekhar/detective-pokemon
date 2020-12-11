@@ -5,6 +5,7 @@ class NameInput extends Component {
     super();
     this.state = {
       userName: "",
+      userNameTooSmall: false
     };
   }
 
@@ -19,27 +20,46 @@ class NameInput extends Component {
 //Store the name in App.js state
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.userInput(this.state.userName, true);
+    // console.log(this.state.userName.length);
+    if (this.state.userName.length > 1) {
+      this.props.userInput(this.state.userName, true);
+      this.setState({
+        userNameTooSmall: false
+      })
+    } else {
+      // 
+      console.log(`not long enough`);
+      this.setState({
+        userNameTooSmall: true
+      })
+    }
   };
 
   render() {
     return (
-      <form name="userName" className="userNameForm">
-        <label htmlFor="nameInput">
-          Your name:
-          {/* <Ball displayClass="ball" /> */}
-        </label>
-        <input
-          onChange={this.handleChange}
-          type="text"
-          name="nameInput"
-          id="nameInput"
-        />
+      <>
+        <form name="userName" className="userNameForm">
+          <label htmlFor="nameInput">
+            Your name:
+            {/* <Ball displayClass="ball" /> */}
+          </label>
+          <input
+            onChange={this.handleChange}
+            type="text"
+            name="nameInput"
+            id="nameInput"
+          />
 
-        <button className="nameButton" onClick={this.handleSubmit}>
-          Submit
-        </button>
-      </form>
+          <button className="nameButton" onClick={this.handleSubmit}>
+            Submit
+          </button>
+        </form>
+
+        {this.state.userNameTooSmall ? 
+        <p className="charWarning"><span className="charWarningText">Please enter at least 2 characters for your username</span> 🙃 </p>
+        : null }
+
+      </>
     );
   }
 }
