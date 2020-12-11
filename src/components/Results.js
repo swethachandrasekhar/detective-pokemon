@@ -34,7 +34,7 @@ class Results extends Component {
           </div>
 
           <div className="again">
-            <p onClick={this.resetGame}>play again</p>
+            <p onClick={this.resetGame}>Play again?</p>
           </div>
 
         </div>
@@ -52,7 +52,7 @@ class Results extends Component {
           </div>
 
           <div className="again">
-            <p onClick={this.resetGame}>play again</p>
+            <p onClick={this.resetGame}>Play again?</p>
           </div>
 
         </div>
