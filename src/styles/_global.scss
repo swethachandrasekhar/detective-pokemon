@@ -78,7 +78,8 @@ p {
 [name='dropdownForm']{
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  margin-bottom: 50px;
 }
 
 [name='dropdownForm'] button{
@@ -100,7 +101,8 @@ h1 {
 }
 
 footer {
-
+  margin-top: 50px;
+  margin-bottom: 20px;
   p {
   font-size: 1.6rem;
   color: $red;
@@ -122,8 +124,22 @@ footer {
 
 }
 
+@media (max-width: 720px){
+  [name='dropdownForm']{
+    justify-content: stretch;
+    flex-direction: column;
+    // flex-wrap: nowrap;
+    margin-bottom: 50px;
+  }
 
-@media (max-width: 600px){
+  select{
+    margin-bottom: 10px;
+    margin-right: 0;
+  }
+
+  [name='dropdownForm'] button{
+    padding: 10px;
+  }
 
   footer {
     flex-wrap: wrap;
@@ -133,9 +149,4 @@ footer {
       margin: 0;
     }
   }
-
-  .pokemonBall {
-    display: none;
-  }
-
 }

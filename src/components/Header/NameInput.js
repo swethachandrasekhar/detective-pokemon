@@ -27,7 +27,7 @@ class NameInput extends Component {
       <form name="userName" className="userNameForm">
         <label htmlFor="nameInput">
           Your name:
-          <Ball displayClass="ball" />
+          {/* <Ball displayClass="ball" /> */}
         </label>
         <input
           onChange={this.handleChange}

@@ -135,10 +135,14 @@ class Home extends Component {
         </div>
 
         {/* Display the results page      */}
-          <Results
-            key={this.state.gameFlag}
-            isSuccessfulFlag={this.state.gameFlag}
-          />
+          <div ref={this.resultsSection}>
+            <Results
+              key={this.state.gameFlag}
+              isSuccessfulFlag={this.state.gameFlag}
+              userName={this.props.userName}
+              chosenPokeName={this.state.chosenPokeName}
+            />
+          </div>
         </div>
       </main>
     );
