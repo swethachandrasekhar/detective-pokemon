@@ -12,6 +12,7 @@ class CrimeLocation extends Component {
   render() {
     return (
       <select onChange={this.onLocationChange}>
+        <option value="none">Choose location</option>
         {cityCoordinates.map((place) => {
           return (
             <option key={place.poly} value={place.poly}>
