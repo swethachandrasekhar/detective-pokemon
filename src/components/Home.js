@@ -61,7 +61,6 @@ class Home extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.scrollToDiv);
     //Get the success Pokemon Type and set it in State
     const pokemonType = this.getPokemonType(this.state.selectedCrime);
     this.setState({
@@ -75,7 +74,7 @@ class Home extends Component {
 
  //Function to store the game(win/lose) flag 
   handleGameFlag = (flagValue, chosenPokeName, chosenPokeImageUrl) => {
-    console.log(chosenPokeImageUrl);
+  
     this.props.isQuizzed(flagValue);
     this.setState({
       gameFlag: flagValue,
@@ -85,7 +84,7 @@ class Home extends Component {
       window.scrollTo({
         top: this.resultsSection.current.offsetTop
       });
-      console.log(this.state.chosenPokeImageUrl);
+      
     }
     
     );

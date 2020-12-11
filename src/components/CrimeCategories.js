@@ -11,6 +11,7 @@ class CrimeCategories extends Component {
   render() {
     return (
       <select onChange={this.handleCrime}>
+          <option value="none">Choose crime</option>
         {this.props.crimeCategoriesArray.map((category, index) => {
           return (
             <option key={index} value={category}>
