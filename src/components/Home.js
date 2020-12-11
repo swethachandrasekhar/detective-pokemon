@@ -91,6 +91,11 @@ class Home extends Component {
     );
   };
 
+  resetGame = (flag) => {
+    this.props.reset();
+    console.log(flag);
+  }
+
   capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
@@ -115,7 +120,7 @@ class Home extends Component {
                         crimeCategoriesArray={this.state.crimeCategories}
                       />
 
-                      <button onClick={this.handleSubmit}>Submit</button> 
+                      <button className="dropdownForm" onClick={this.handleSubmit}>Submit</button> 
                     </>
                   : null
                 }
@@ -148,6 +153,7 @@ class Home extends Component {
               chosenPokeImageUrl={this.state.chosenPokeImageUrl}
               selectedCrime={this.state.selectedCrime}
               capitalizeFirstLetter={this.capitalizeFirstLetter}
+              resetGame={this.resetGame}
             />
           </div>
         </div>

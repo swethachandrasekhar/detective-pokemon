@@ -11,6 +11,11 @@ class Results extends Component {
     };
   }
 
+  resetGame = (flag) => {
+    this.props.resetGame('')
+    console.log('reset');
+  }
+
   render() {
     // If the flag is not set, do not display results 
     //Otherwise display appropriate results
@@ -25,7 +30,11 @@ class Results extends Component {
 
           <div className="resultsImagesDiv loser">
             <img src={this.props.chosenPokeImageUrl} alt={this.props.userName}/>
-            <img src={redX} alt="a red X" class="redX"/>
+            <img src={redX} alt="a red X" className="redX"/>
+          </div>
+
+          <div className="again">
+            <p onClick={this.resetGame}>play again</p>
           </div>
 
         </div>
@@ -41,6 +50,11 @@ class Results extends Component {
             <img src={this.props.chosenPokeImageUrl} alt={this.props.userName}/>
             {/* <img src={greenCirc} alt="a green circle" class="greenCirc"/> */}
           </div>
+
+          <div className="again">
+            <p onClick={this.resetGame}>play again</p>
+          </div>
+
         </div>
       );
     }

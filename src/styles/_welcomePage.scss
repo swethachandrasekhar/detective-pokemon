@@ -21,6 +21,15 @@ input {
   padding: 10px;
   border: 4px solid $darkgreen;
 }
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+opacity: 0; 
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+opacity: 0;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+opacity: 0;
+}
 
 .nameButton {
   background-color: $yellow;
@@ -50,6 +59,15 @@ input {
   label{
     visibility: hidden;
     height: 0;
+  }
+  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  opacity: 0.8; 
+  }
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+  opacity: 0.8;
+  }
+  ::-ms-input-placeholder { /* Microsoft Edge */
+  opacity: 0.8;
   }
 
   .nameButton{
