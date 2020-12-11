@@ -2,8 +2,8 @@ import { Component } from "react";
 import NameInput from "./NameInput.js";
 
 class Header extends Component {
-  getUsername = (name) => {
-    this.props.getUser(name);
+  getUsername = (name, isSubmit) => {
+    this.props.getUser(name, isSubmit);
   };
 
   render() {
@@ -11,8 +11,6 @@ class Header extends Component {
       <>
         <header>
           <div className="wrapper">
-            {/* App name */}
-            <h1>Detective Pokémon</h1>
 
             {/* Game rules  */}
             <article className="introText">
@@ -29,15 +27,6 @@ class Header extends Component {
 
             {/* Component to accept user's name  */}
             <NameInput userInput={this.getUsername} />
-
-            {this.props.username.length >= 2 ? (
-              <p>
-                Thank you{" "}
-                <span>
-                  {this.props.username} for joining this fight with us!
-                </span>
-              </p>
-            ) : null}
           </div>
         </header>
       </>

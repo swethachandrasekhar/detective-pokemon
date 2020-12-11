@@ -76,6 +76,7 @@ class Home extends Component {
  //Function to store the game(win/lose) flag 
   handleGameFlag = (flagValue, chosenPokeName, chosenPokeImageUrl) => {
     console.log(chosenPokeImageUrl);
+    this.props.isQuizzed(flagValue);
     this.setState({
       gameFlag: flagValue,
       chosenPokeName: chosenPokeName,
@@ -98,40 +99,45 @@ class Home extends Component {
     return (
       <main>
         <div className="wrapper">
-        <form name="dropdownForm">
-          {/* if selected location not equal to ''
-              then show CrimeCategories dropdown and submit button */}
-          <CrimeLocation getLocation={this.getLocationChange} />
-          
           {
-            this.state.selectedLocation !== ''
-            ? <>
-                <CrimeCategories 
-                  getCrimeChange={this.handleCrime} 
-                  crimeCategoriesArray={this.state.crimeCategories}
-                />
+            this.state.gameFlag === '' ?
+            <div>
+              <form name="dropdownForm">
+                {/* if selected location not equal to ''
+                    then show CrimeCategories dropdown and submit button */}
+                <CrimeLocation getLocation={this.getLocationChange} />
+                
+                {
+                  this.state.selectedLocation !== ''
+                  ? <>
+                      <CrimeCategories 
+                        getCrimeChange={this.handleCrime} 
+                        crimeCategoriesArray={this.state.crimeCategories}
+                      />
 
-                <button onClick={this.handleSubmit}>Submit</button> 
-              </>
+                      <button onClick={this.handleSubmit}>Submit</button> 
+                    </>
+                  : null
+                }
+                
+              </form>
+
+              {/* DISPLAY ALL QUIZ STUFF */}
+              <div ref={this.scrollToDiv}>
+                {this.state.successPokemonType ? (
+                  <Pokemons
+                    key={this.state.successPokemonType}
+                    crime={this.state.selectedCrime}
+                    successPokemonType={this.state.successPokemonType}
+                    location={this.state.selectedLocation}
+                    handleGameFlag={this.handleGameFlag}
+                    capitalizeFirstLetter={this.capitalizeFirstLetter}
+                  />
+                ) : null}
+              </div>
+            </div>
             : null
           }
-          
-        </form>
-
-        {/* DISPLAY ALL QUIZ STUFF */}
-        <div ref={this.scrollToDiv}>
-          {this.state.successPokemonType ? (
-            <Pokemons
-              key={this.state.successPokemonType}
-              crime={this.state.selectedCrime}
-              successPokemonType={this.state.successPokemonType}
-              location={this.state.selectedLocation}
-              handleGameFlag={this.handleGameFlag}
-              capitalizeFirstLetter={this.capitalizeFirstLetter}
-            />
-          ) : null}
-        </div>
-
         {/* Display the results page      */}
           <div ref={this.resultsSection}>
             <Results

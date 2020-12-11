@@ -19,7 +19,7 @@ class NameInput extends Component {
 //Store the name in App.js state
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.userInput(this.state.userName);
+    this.props.userInput(this.state.userName, true);
   };
 
   render() {
@@ -37,7 +37,6 @@ class NameInput extends Component {
         />
 
         <button className="nameButton" onClick={this.handleSubmit}>
-          {" "}
           Submit
         </button>
       </form>

@@ -22,6 +22,7 @@ html,body {
   // height: 100%;
   margin: 0;
 }
+
 a {
   color: $yellow;
   text-decoration: none;
@@ -41,7 +42,7 @@ h1 {
   border-radius: 2rem;
   font-size: 6rem;
   background-color: $black;
-  //   width: 500px;
+  text-align: center;
 }
 
 .wrapper {
@@ -52,7 +53,6 @@ h1 {
 
 header {
   text-align: center;
-  // height: 100vh;
 }
 
 article {
@@ -73,6 +73,14 @@ article {
 
 p {
   font-size: 2.3rem;
+}
+
+.greeting{
+  text-align: center;
+  span{
+    color: $yellow;
+    font-weight: 700;
+  }
 }
 
 [name='dropdownForm']{

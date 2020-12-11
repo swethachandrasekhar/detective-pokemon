@@ -10,28 +10,56 @@ class App extends Component {
   constructor(){
     super();
     this.state ={
-      user: ''
+      user: '',
+      isNameSubmit: false,
+      quizzed: ''
     }
   }
 
- grabUsername = (name) => {
+ grabUsername = (name, isSubmit) => {
     this.setState({
-      user: name
+      user: name,
+      isNameSubmit: isSubmit
     })
+ }
+
+ isQuizzed = (quizzed) => {
+   this.setState({
+     quizzed: quizzed
+   })
  }
 
   render() {
     return (
       <>
         <div className="content">
-
-          <Header getUser={this.grabUsername} username={this.state.user}/>
+          <div className="wrapper">
+            <h1>Detective Pokémon</h1>
+          </div>
+          {
+            !this.state.isNameSubmit 
+            ? <Header getUser={this.grabUsername} username={this.state.user}/>
+            : null
+          }
+          
+            <div className="wrapper greeting">
+              {
+              this.state.user.length >= 2 && this.state.quizzed === ''
+                ? <>
+                    <p>Thank you{" "} <span> {this.state.user} </span> for joining this fight with us!</p>
+                    <p>Please pick a city and the category of crime that you will help to solve.</p>
+                  </>
+                : null
+              }
+            </div>
+          
 
           {
             this.state.user.length >= 2
               ? <Home
                 userName={this.state.user}
-                 />
+                isQuizzed={this.isQuizzed} 
+                />
               : null
           }
 
