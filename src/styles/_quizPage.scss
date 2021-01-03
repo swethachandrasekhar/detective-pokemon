@@ -1,6 +1,7 @@
 
 .pokeDisplay {
     width: 200px;
+    cursor: pointer;
   
     img {
       width: 100%;
@@ -17,6 +18,21 @@
     }
 }
 
+.pokeDisplay:hover, .pokeDisplay:focus {
+   animation: heartbeat 1s infinite;
+}
+
+@keyframes heartbeat {
+	0% {
+		transform: scale(1) ;
+	} 
+	20% {
+		transform: scale(1.05) ; 
+	}
+	40% {
+ 		transform: scale(1.1) ;
+	}
+}
 .quizMessage, .chooseYourFighter {
   border: 7px solid $red;
   border-radius: 2rem;
@@ -28,6 +44,9 @@
   text-align: center;
 }
 
+.chooseYourFighter {
+  margin-bottom: 80px;
+}
 .chosenCity, .chosenCrime {
   color: $yellow;
   font-weight: bold;

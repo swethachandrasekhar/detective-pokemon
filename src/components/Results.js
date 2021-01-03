@@ -25,18 +25,35 @@ class Results extends Component {
       return (
         <div className="resultsSection">
           <h3>DANG, {this.props.userName}...</h3>
-          
-          <p><span className="resultPokeName">{this.props.capitalizeFirstLetter(this.props.chosenPokeName)}</span> was not able to figure out a crime about <span className="resultCrimeName">{this.props.selectedCrime}</span></p>
+
+          <p>
+            <span className="resultPokeName">
+              {this.props.capitalizeFirstLetter(this.props.chosenPokeName)}
+            </span>{" "}
+            was not able to figure out a crime about{" "}
+            <span className="resultCrimeName">{this.props.selectedCrime}</span>
+          </p>
 
           <div className="resultsImagesDiv loser">
-            <img src={this.props.chosenPokeImageUrl} alt={this.props.userName}/>
-            <img src={redX} alt="a red X" className="redX"/>
+            <img
+              src={this.props.chosenPokeImageUrl}
+              alt={this.props.userName}
+            />
+            <img src={redX} alt="a red X" className="redX" />
           </div>
 
-          <div className="again">
+          <div className="gameButtons">
+            <button className="again" onClick={this.props.playAgain}>
+              Play again
+            </button>
+            <button className="again" onClick={this.resetGame}>
+              Game restart
+            </button>
+          </div>
+          {/* <div className="again">
             <p onClick={this.resetGame}>Play again?</p>
-          </div>
-
+            <button>reset game</button>
+          </div> */}
         </div>
       );
     } else {
@@ -44,17 +61,35 @@ class Results extends Component {
         <div className="resultsSection">
           <h3>OKAYY {this.props.userName}!</h3>
 
-          <p>Great job! <span className="resultPokeName">{this.props.capitalizeFirstLetter(this.props.chosenPokeName)}</span> had what it took to figure out a crime about <span className="resultCrimeName">{this.props.selectedCrime}</span>!</p>
+          <p>
+            Great job!{" "}
+            <span className="resultPokeName">
+              {this.props.capitalizeFirstLetter(this.props.chosenPokeName)}
+            </span>{" "}
+            had what it took to figure out a crime about{" "}
+            <span className="resultCrimeName">{this.props.selectedCrime}</span>!
+          </p>
 
           <div className="resultsImagesDiv winner">
-            <img src={this.props.chosenPokeImageUrl} alt={this.props.userName}/>
+            <img
+              src={this.props.chosenPokeImageUrl}
+              alt={this.props.userName}
+            />
             {/* <img src={greenCirc} alt="a green circle" class="greenCirc"/> */}
           </div>
 
-          <div className="again">
-            <p onClick={this.resetGame}>Play again?</p>
+          <div className="gameButtons">
+            <button className="again" onClick={this.props.playAgain}>
+              Play again
+            </button>
+            <button className="again" onClick={this.resetGame}>
+              Game restart
+            </button>
           </div>
-
+          {/* <div className="again">
+            <p onClick={this.resetGame}>Play again?</p>
+            <button>reset game</button>
+          </div> */}
         </div>
       );
     }

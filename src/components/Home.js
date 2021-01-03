@@ -95,6 +95,11 @@ class Home extends Component {
     console.log(flag);
   }
 
+  playAgain = () => {
+    this.setState({
+      gameFlag: '',
+    });
+  }
   capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
@@ -103,30 +108,27 @@ class Home extends Component {
     return (
       <main>
         <div className="wrapper">
-          {
-            this.state.gameFlag === '' ?
-            <div>
-              <form name="dropdownForm">
-                {/* if selected location not equal to ''
+          <div>
+            <form name="dropdownForm">
+              {/* if selected location not equal to ''
                     then show CrimeCategories dropdown and submit button */}
-                <CrimeLocation getLocation={this.getLocationChange} />
-                
-                {
-                  this.state.selectedLocation !== ''
-                  ? <>
-                      <CrimeCategories 
-                        getCrimeChange={this.handleCrime} 
-                        crimeCategoriesArray={this.state.crimeCategories}
-                      />
+              <CrimeLocation getLocation={this.getLocationChange} />
 
-                      <button className="dropdownForm" onClick={this.handleSubmit}>Submit</button> 
-                    </>
-                  : null
-                }
-                
-              </form>
+              {this.state.selectedLocation !== "" ? (
+                <>
+                  <CrimeCategories
+                    getCrimeChange={this.handleCrime}
+                    crimeCategoriesArray={this.state.crimeCategories}
+                  />
 
-              {/* DISPLAY ALL QUIZ STUFF */}
+                  <button className="dropdownForm" onClick={this.handleSubmit}>
+                    Submit
+                  </button>
+                </>
+              ) : null}
+            </form>
+            {this.state.gameFlag === "" ? (
+              // {/* DISPLAY ALL QUIZ STUFF */}
               <div ref={this.scrollToDiv}>
                 {this.state.successPokemonType ? (
                   <Pokemons
@@ -139,10 +141,9 @@ class Home extends Component {
                   />
                 ) : null}
               </div>
-            </div>
-            : null
-          }
-        {/* Display the results page      */}
+            ) : null}
+          </div>
+          {/* Display the results page      */}
           <div ref={this.resultsSection}>
             <Results
               key={this.state.gameFlag}
@@ -153,6 +154,7 @@ class Home extends Component {
               selectedCrime={this.state.selectedCrime}
               capitalizeFirstLetter={this.capitalizeFirstLetter}
               resetGame={this.resetGame}
+              playAgain={this.playAgain}
             />
           </div>
         </div>

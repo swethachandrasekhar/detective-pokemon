@@ -235,8 +235,7 @@ class Pokemons extends Component {
                 You are in{" "}
                 <span className="chosenCity">{this.state.cityName}</span>,
                 trying to solve a{" "}
-                <span className="chosenCrime">{this.props.crime}</span> type of
-                crime.
+                <span className="chosenCrime">{this.props.crime}</span> crime.
               </p>
             </div>
 
@@ -249,7 +248,7 @@ class Pokemons extends Component {
               {this.state.displayPokemonList
                 ? this.state.displayPokemonList.map((pokemon, pokemonIndex) => {
                     return (
-                      <article
+                      <article 
                         className="pokeDisplay" 
                         key={`${pokemonIndex}${pokemon.name}`}
                         onClick={() => {

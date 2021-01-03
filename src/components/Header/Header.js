@@ -15,7 +15,7 @@ class Header extends Component {
             {/* Game rules  */}
             <article className="introText">
               <p>
-                It is dark times out there. In this new world, Pokémon come to
+                It is dark times out there. In this new world, Pokémons come to
                 rescue and support the UK law enforcement.
               </p>
               <p>
