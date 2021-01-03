@@ -15,3 +15,7 @@ This project was built using ReactJS, SCSS, Axios as well as the UK Police API a
 1. Run **npm run deploy**
 
 
+## Authors
+  [Swetha Chandrasekhar](https://github.com/swethachandrasekhar)
+  [Stephen Thomas](https://github.com/stevekwt)
+  [Quayne Brown](https://github.com/quaynebrown)
