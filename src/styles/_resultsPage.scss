@@ -84,3 +84,19 @@ img.greenCirc {
     font-family:'Barlow', sans-serif;
     font-weight: bold;
 }
+
+@media (max-width: 800px) {
+
+    .resultsSection {
+        width: 100%;
+    }
+
+    .gameButtons {
+        flex-direction: column;
+        margin-top: 30px;
+    }
+    .again {
+        font-size: 2rem;
+        margin: 10px 0 0 0 ;
+    }
+}
