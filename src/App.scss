@@ -1,9 +1,0 @@
-@import './styles/setup';
-@import './styles/fonts';
-@import './styles/colors';
-// colors has to be imported before files that use it
-@import './styles/global';
-@import './styles/welcomePage';
-@import './styles/quizPage.scss';
-@import './styles/ball';
-@import './styles/resultsPage';
