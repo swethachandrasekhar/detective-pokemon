@@ -1,5 +1,4 @@
 import { Component } from "react";
-import Ball from "../Ball.js";
 class NameInput extends Component {
   constructor() {
     super();

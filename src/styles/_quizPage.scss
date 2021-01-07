@@ -1,53 +1,86 @@
-
 .pokeDisplay {
-    width: 200px;
-    cursor: pointer;
-  
-    img {
-      width: 100%;
-    }
+  width: 200px;
+  cursor: pointer;
+  margin: 0 auto 40px;
+  padding: 0 20px;
+  background-color: $black;
+  border-radius: 25px;
+  border: 4px solid $primaryWhite;
 
-    ul{
-      padding: 0;
-    }
+  img {
+    width: 100%;
+    border-radius: 50%;
+  }
 
-    li{
-      list-style-type: none;
-      padding: 3px 6px;
-      text-align: center;
-    }
+  ul {
+    padding: 0;
+  }
+
+  li {
+    list-style-type: none;
+    padding: 3px 6px;
+    text-align: center;
+  }
+  p {
+    text-align: center;
+    color: $yellow;
+    font-size: 2.8rem;
+  }
 }
 
-.pokeDisplay:hover, .pokeDisplay:focus {
-   animation: heartbeat 1s infinite;
+.pokeDisplay:hover,
+.pokeDisplay:focus {
+  animation: heartbeat 1s infinite;
 }
 
 @keyframes heartbeat {
-	0% {
-		transform: scale(1) ;
-	} 
-	20% {
-		transform: scale(1.05) ; 
-	}
-	40% {
- 		transform: scale(1.1) ;
-	}
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1.05);
+  }
+  40% {
+    transform: scale(1.1);
+  }
+  0%,
+  19%,
+  21%,
+  23%,
+  25%,
+  54%,
+  56%,
+  100% {
+    text-shadow: -0.1rem -0.1rem 1rem $primaryAccent,
+      0.2rem 0.2rem 1rem $primaryAccent, 0 0 2rem $headingSelection,
+      0 0 4rem $headingSelection, 0 0 6rem $headingSelection,
+      0 0 8rem $headingSelection, 0 0 10rem $headingSelection;
+    box-shadow: 0 0 0.5rem $primaryWhite, inset 0 0 0.5rem $primaryWhite,
+      0 0 2rem $primaryColor, inset 0 0 2rem $primaryColor,
+      0 0 3rem $headingSelection, inset 0 0 3rem $primaryColor;
+  }
 }
-.quizMessage, .chooseYourFighter {
-  border: 7px solid $red;
+.quizMessage,
+.chooseYourFighter {
   border-radius: 2rem;
   font-size: 6rem;
   background-color: $black;
-  padding: 0 15px;
-  margin: 20px auto;
+  padding: 1px 15px;
+  margin: 0px auto;
   max-width: 730px;
   text-align: center;
 }
 
 .chooseYourFighter {
   margin-bottom: 80px;
+  background: none;
+  text-shadow: -0.1rem -0.1rem 1rem $primaryAccent,
+    0.2rem 0.2rem 1rem $primaryAccent, 0 0 2rem $headingSelection,
+    0 0 4rem $headingSelection, 0 0 6rem $headingSelection,
+    0 0 8rem $headingSelection, 0 0 10rem $headingSelection;
 }
-.chosenCity, .chosenCrime {
+.chosenCity,
+.chosenCrime {
   color: $yellow;
   font-weight: bold;
 }
@@ -55,4 +88,18 @@
 .options {
   display: flex;
   flex-wrap: wrap;
+}
+@keyframes neonPokemon {
+  0%,
+  19%,
+  21%,
+  23%,
+  25%,
+  54%,
+  56%,
+  100% {
+    box-shadow: 0 0 0.5rem $primaryWhite, inset 0 0 0.5rem $primaryWhite,
+      0 0 2rem $primaryColor, inset 0 0 2rem $primaryColor,
+      0 0 3rem $headingSelection, inset 0 0 3rem $primaryColor;
+  }
 }

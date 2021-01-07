@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { cityCoordinates } from "../dataStructures.js";
-import Ball from './Ball.js'
+import Ball from "./Ball.js";
 
 class Pokemons extends Component {
   constructor() {
@@ -115,7 +115,6 @@ class Pokemons extends Component {
     });
   };
 
-
   // Fisher-Yates to shuffle the final array everytime before displaying
   shuffle = (array) => {
     let currentIndex = array.length,
@@ -132,11 +131,9 @@ class Pokemons extends Component {
 
     return array;
   };
-  
-  
+
   //Function to make an API call to each pokemon endpoint to get the pokemon details(like abilities, image, name etc)
   getFinalPokemonDisplayList = async (pokemonArray, flag) => {
-
     let requestPokemonArray = [];
     let allPokeProperties = [];
     //Create an array of axios calls
@@ -148,16 +145,14 @@ class Pokemons extends Component {
     const resultPokemonObject = await Promise.all([...requestPokemonArray]);
 
     resultPokemonObject.forEach((pokemonObj) => {
-
       let onePokeProperties = {};
-       //Pokemon image 
+      //Pokemon image
       const pokeImage =
         pokemonObj[`data`][`sprites`][`other`][`official-artwork`][
           `front_default`
         ];
 
       if (pokeImage !== null) {
-
         const abilities = pokemonObj[`data`][`abilities`];
 
         let abilityArray = [];
@@ -177,17 +172,15 @@ class Pokemons extends Component {
           match: flag,
           image: pokeImage,
         };
-        // Push the objects in to an array  
+        // Push the objects in to an array
         allPokeProperties.push(onePokeProperties);
       }
     });
     return allPokeProperties;
   };
 
-
   //Function that returns a random index
   getRandomIndex = (limit) => {
-
     const index = Math.floor(Math.random() * limit);
     // If the returned index is 0 make it 1
     return index === 0 ? index + 1 : index;
@@ -214,20 +207,24 @@ class Pokemons extends Component {
   handlePokemonSelect = (selectedPokemonObject) => {
     console.log(selectedPokemonObject);
     if (selectedPokemonObject.match === "correct") {
-      this.props.handleGameFlag(true, selectedPokemonObject.name, selectedPokemonObject.image);
+      this.props.handleGameFlag(
+        true,
+        selectedPokemonObject.name,
+        selectedPokemonObject.image
+      );
     } else if (selectedPokemonObject.match === "wrong") {
-      this.props.handleGameFlag(false, selectedPokemonObject.name, selectedPokemonObject.image);
+      this.props.handleGameFlag(
+        false,
+        selectedPokemonObject.name,
+        selectedPokemonObject.image
+      );
     }
-    
   };
-
 
   render() {
     return (
       <div>
-        {
-         
-        this.state.displayPokemonList.length !== 0 ? (
+        {this.state.displayPokemonList.length !== 0 ? (
           <>
             <div className="quizMessage">
               <p>
@@ -248,8 +245,8 @@ class Pokemons extends Component {
               {this.state.displayPokemonList
                 ? this.state.displayPokemonList.map((pokemon, pokemonIndex) => {
                     return (
-                      <article 
-                        className="pokeDisplay" 
+                      <article
+                        className="pokeDisplay"
                         key={`${pokemonIndex}${pokemon.name}`}
                         onClick={() => {
                           this.handlePokemonSelect(pokemon);
@@ -266,9 +263,7 @@ class Pokemons extends Component {
                         <ul>
                           {pokemon.abilities.map((ability, index) => {
                             return (
-                              <li key={`${ability}${index}`}>
-                                {ability}
-                              </li>
+                              <li key={`${ability}${index}`}>{ability}</li>
                             );
                           })}
                         </ul>
@@ -278,14 +273,13 @@ class Pokemons extends Component {
                 : null}
             </div>
           </>
-        ) : 
+        ) : (
           <>
-          
             <Ball />
           </>
-        }
+        )}
       </div>
-    );        
+    );
   }
 }
 

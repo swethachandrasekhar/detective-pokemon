@@ -2,8 +2,7 @@ import { Component } from "react";
 import { cityCoordinates } from "../dataStructures.js";
 
 class CrimeLocation extends Component {
-
-  //Function to store user's selected location in the parent component's state  
+  //Function to store user's selected location in the parent component's state
   onLocationChange = (e) => {
     this.props.getLocation(e.target.value);
   };

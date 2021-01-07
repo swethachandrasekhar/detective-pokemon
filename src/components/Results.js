@@ -1,28 +1,25 @@
 import React, { Component } from "react";
 import redX from "../assets/redX.png";
-import greenCirc from "../assets/vert.svg";
-
 
 class Results extends Component {
   constructor() {
     super();
-    this.state = {
-      
-    };
+    this.state = {};
   }
 
   resetGame = (flag) => {
-    this.props.resetGame('')
-    console.log('reset');
-  }
+    this.props.resetGame("");
+    console.log("reset");
+  };
 
   render() {
-    // If the flag is not set, do not display results 
+    // If the flag is not set, do not display results
     //Otherwise display appropriate results
     if (this.props.isSuccessfulFlag === "") {
       return null;
     } else if (this.props.isSuccessfulFlag === false) {
       return (
+        //success message
         <div className="resultsSection">
           <h3>DANG, {this.props.userName}...</h3>
 
@@ -30,8 +27,7 @@ class Results extends Component {
             <span className="resultPokeName">
               {this.props.capitalizeFirstLetter(this.props.chosenPokeName)}
             </span>{" "}
-            was not able to figure out a crime about{" "}
-            <span className="resultCrimeName">{this.props.selectedCrime}</span>
+            was not able to solve the crime!!{" "}
           </p>
 
           <div className="resultsImagesDiv loser">
@@ -41,6 +37,7 @@ class Results extends Component {
             />
             <img src={redX} alt="a red X" className="redX" />
           </div>
+          {/* options for game restart and play again */}
 
           <div className="gameButtons">
             <button className="again" onClick={this.props.playAgain}>
@@ -50,14 +47,11 @@ class Results extends Component {
               Game restart
             </button>
           </div>
-          {/* <div className="again">
-            <p onClick={this.resetGame}>Play again?</p>
-            <button>reset game</button>
-          </div> */}
         </div>
       );
     } else {
       return (
+        //failure message
         <div className="resultsSection">
           <h3>OKAYY {this.props.userName}!</h3>
 
@@ -66,8 +60,7 @@ class Results extends Component {
             <span className="resultPokeName">
               {this.props.capitalizeFirstLetter(this.props.chosenPokeName)}
             </span>{" "}
-            had what it took to figure out a crime about{" "}
-            <span className="resultCrimeName">{this.props.selectedCrime}</span>!
+            solved the crime!{" "}
           </p>
 
           <div className="resultsImagesDiv winner">
@@ -75,9 +68,8 @@ class Results extends Component {
               src={this.props.chosenPokeImageUrl}
               alt={this.props.userName}
             />
-            {/* <img src={greenCirc} alt="a green circle" class="greenCirc"/> */}
           </div>
-
+          {/* options for game restart and play again */}
           <div className="gameButtons">
             <button className="again" onClick={this.props.playAgain}>
               Play again
@@ -86,10 +78,6 @@ class Results extends Component {
               Game restart
             </button>
           </div>
-          {/* <div className="again">
-            <p onClick={this.resetGame}>Play again?</p>
-            <button>reset game</button>
-          </div> */}
         </div>
       );
     }

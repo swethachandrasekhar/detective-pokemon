@@ -11,7 +11,6 @@ class Header extends Component {
       <>
         <header>
           <div className="wrapper">
-
             {/* Game rules  */}
             <article className="introText">
               <p>

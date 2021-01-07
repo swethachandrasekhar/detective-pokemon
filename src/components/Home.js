@@ -24,13 +24,13 @@ class Home extends Component {
   componentDidMount() {
     // store each properties in an array
     const crimeArray = Object.keys(crimeCategories);
-    
+
     this.setState({
       crimeCategories: crimeArray,
     });
   }
 
-//Function to get success Pokemon Type based on the selected Crime Category
+  //Function to get success Pokemon Type based on the selected Crime Category
   getPokemonType = (userSelectedCrime) => {
     let successType;
     for (const key in crimeCategories) {
@@ -42,67 +42,68 @@ class Home extends Component {
     return successType;
   };
 
-//Function to set the user's selected Location
+  //Function to set the user's selected Location
   getLocationChange = (selectedLocation) => {
     this.setState({
       selectedLocation: selectedLocation,
     });
   };
 
- //Function to set the user's selected Crime Category 
+  //Function to set the user's selected Crime Category
   handleCrime = (selectedCrime) => {
     this.setState({
       selectedCrime: selectedCrime,
     });
   };
 
-
-// Function to handle submit once user has selected the location and crime
+  // Function to handle submit once user has selected the location and crime
 
   handleSubmit = (e) => {
     e.preventDefault();
     //Get the success Pokemon Type and set it in State
     const pokemonType = this.getPokemonType(this.state.selectedCrime);
-    this.setState({
-      successPokemonType: pokemonType,
-    }, () => {
-      window.scrollTo({
-        top: this.scrollToDiv.current.offsetTop
-      });
-    });
+    this.setState(
+      {
+        successPokemonType: pokemonType,
+      },
+      () => {
+        window.scrollTo({
+          top: this.scrollToDiv.current.offsetTop,
+        });
+      }
+    );
   };
 
- //Function to store the game(win/lose) flag 
+  //Function to store the game(win/lose) flag
   handleGameFlag = (flagValue, chosenPokeName, chosenPokeImageUrl) => {
-  
     this.props.isQuizzed(flagValue);
-    this.setState({
-      gameFlag: flagValue,
-      chosenPokeName: chosenPokeName,
-      chosenPokeImageUrl: chosenPokeImageUrl
-    }, () => {
-      window.scrollTo({
-        top: this.resultsSection.current.offsetTop
-      });
-      
-    }
-    
+    this.setState(
+      {
+        gameFlag: flagValue,
+        chosenPokeName: chosenPokeName,
+        chosenPokeImageUrl: chosenPokeImageUrl,
+      },
+      () => {
+        window.scrollTo({
+          top: this.resultsSection.current.offsetTop,
+        });
+      }
     );
   };
 
   resetGame = (flag) => {
     this.props.reset();
     console.log(flag);
-  }
+  };
 
   playAgain = () => {
     this.setState({
-      gameFlag: '',
+      gameFlag: "",
     });
-  }
+  };
   capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
-  }
+  };
 
   render() {
     return (
