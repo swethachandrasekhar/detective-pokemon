@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/detective-pokemon/static/css/main.9c80d8f4.chunk.css",
-    "main.js": "/detective-pokemon/static/js/main.d60d9e2d.chunk.js",
-    "main.js.map": "/detective-pokemon/static/js/main.d60d9e2d.chunk.js.map",
+    "main.css": "/detective-pokemon/static/css/main.3278799c.chunk.css",
+    "main.js": "/detective-pokemon/static/js/main.d7c2e93d.chunk.js",
+    "main.js.map": "/detective-pokemon/static/js/main.d7c2e93d.chunk.js.map",
     "runtime-main.js": "/detective-pokemon/static/js/runtime-main.514c41fc.js",
     "runtime-main.js.map": "/detective-pokemon/static/js/runtime-main.514c41fc.js.map",
     "static/js/2.2b4254ea.chunk.js": "/detective-pokemon/static/js/2.2b4254ea.chunk.js",
@@ -10,17 +10,16 @@
     "static/js/3.5462005c.chunk.js": "/detective-pokemon/static/js/3.5462005c.chunk.js",
     "static/js/3.5462005c.chunk.js.map": "/detective-pokemon/static/js/3.5462005c.chunk.js.map",
     "index.html": "/detective-pokemon/index.html",
-    "static/css/main.9c80d8f4.chunk.css.map": "/detective-pokemon/static/css/main.9c80d8f4.chunk.css.map",
+    "static/css/main.3278799c.chunk.css.map": "/detective-pokemon/static/css/main.3278799c.chunk.css.map",
     "static/js/2.2b4254ea.chunk.js.LICENSE.txt": "/detective-pokemon/static/js/2.2b4254ea.chunk.js.LICENSE.txt",
     "static/media/App.scss": "/detective-pokemon/static/media/background.c7bec130.jpg",
     "static/media/pokeball-transp.6dabce4f.png": "/detective-pokemon/static/media/pokeball-transp.6dabce4f.png",
-    "static/media/redX.47be6cd2.png": "/detective-pokemon/static/media/redX.47be6cd2.png",
-    "static/media/vert.0d2a7e27.svg": "/detective-pokemon/static/media/vert.0d2a7e27.svg"
+    "static/media/redX.47be6cd2.png": "/detective-pokemon/static/media/redX.47be6cd2.png"
   },
   "entrypoints": [
     "static/js/runtime-main.514c41fc.js",
     "static/js/2.2b4254ea.chunk.js",
-    "static/css/main.9c80d8f4.chunk.css",
-    "static/js/main.d60d9e2d.chunk.js"
+    "static/css/main.3278799c.chunk.css",
+    "static/js/main.d7c2e93d.chunk.js"
   ]
 }
